@@ -3,7 +3,7 @@
 #import "cover/cover_template.typ": cover
 
 //-- subfigure
-#import "@preview/subpar:0.2.2"
+// #import "@preview/subpar:0.2.2"
 //-- admonitions
 #import "@preview/gentle-clues:1.2.0": *
 //-- pseudo-code
@@ -35,10 +35,10 @@
 //-- https://github.com/tingerrr/subpar/issues/16
 #let sub-figure-numbering = (super, sub) => numbering("1.1a", counter(heading).get().first(), super, sub)
 #let figure-numbering = super => numbering("1.1", counter(heading).get().first(), super)
-#let subpar-grid = subpar.grid.with(
-  numbering: figure-numbering,
-  numbering-sub-ref: sub-figure-numbering,
-)
+// #let subpar-grid = subpar.grid.with(
+//   numbering: figure-numbering,
+//   numbering-sub-ref: sub-figure-numbering,
+// )
 
 //-- default for pseudo-code/lovelace
 #let my-lovelace-defaults = (
@@ -55,6 +55,7 @@
   graduation-month: "",
   supervisor1: "",
   supervisor2: "",
+  supervisor3: "",
   coreader   : "",
   graduation-group: "",
   body,
@@ -67,10 +68,29 @@
   set par(justify: true)
 
 
-  let serif-fonts = ("TeX Gyre Pagella", "Palatino", "New Computer Modern") //-- https://www.1001fonts.com/tex-gyre-pagella-font.html
-  let sans-fonts = ("TeX Gyre Heros", "Source Sans Pro", "Calibri")  //-- https://www.1001fonts.com/texgyreheros-font.html + https://github.com/adobe-fonts/source-sans-pro
-  let math-font = ("Stix Two Math", "New Computer Modern Math")     //-- free: https://github.com/stipub/stixfonts
-  let mono-font = ("Consolas")
+let serif-fonts = ("Palatino", "New Computer Modern") 
+
+let sans-fonts = (
+  "Avenir Next",
+  "Avenir",
+  "Helvetica Neue",
+  "Helvetica",
+  "PT Sans",
+  "Arial",
+)
+
+let math-font = (
+  "STIX Two Math",
+  "New Computer Modern Math",
+)
+
+let mono-font = (
+  "PT Mono",
+  "Menlo",
+  "Monaco",
+  "Andale Mono",
+  "DejaVu Sans Mono",
+)
 
 
   set text(

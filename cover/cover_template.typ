@@ -1,4 +1,4 @@
-#import "@preview/ccicons:1.0.1": *
+//#import "@preview/ccicons:1.0.1": *
 
 #let cover(
   title: "",
@@ -38,7 +38,7 @@
   align(bottom)[
     #author: #emph(title) (#graduation-year)
     #linebreak()
-    #text(0.9em, [#cc-by This work is licensed under a Creative Commons Attribution 4.0 International License. To view a copy of this license, visit #link("http://creativecommons.org/licenses/by/4.0/").])
+    #text(0.9em, [This work is licensed under a Creative Commons Attribution 4.0 International License. To view a copy of this license, visit #link("http://creativecommons.org/licenses/by/4.0/").])
     #v(7em, weak: true)
     The work in this thesis was carried out in the: 
     #grid(

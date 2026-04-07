@@ -8,6 +8,7 @@
   graduation-month: mysettings.graduation-month,
   supervisor1: mysettings.supervisor1,
   supervisor2: mysettings.supervisor2,
+  supervisor3: mysettings.supervisor3,
   coreader   : mysettings.coreader,
   graduation-group: mysettings.graduation-group,
   doc,
@@ -88,7 +89,11 @@
 
 #include "chapters/introduction.typ"
 #include "chapters/relatedwork.typ"
-
+#include "chapters/background.typ"
+#include "chapters/methodology.typ"
+#include "chapters/implementation.typ"
+#include "chapters/results.typ"
+#include "chapters/background.typ"
 //-- back-matter
 // must take page breaks into account, may need to be offset by +1 or -1
 // #context counter(page).update(counter(page).at(<front-matter>).first())
@@ -103,4 +108,4 @@
 #include "appendices/someumldia.typ"
 
 //-- references
-#bibliography("./refs/refs.bib", style: "./refs/apa-annotated-bibliography_modified-HL.csl")
+#bibliography("./refs/refs.bib", style: "./refs/ieee.csl")
