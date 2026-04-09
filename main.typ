@@ -93,7 +93,7 @@
 #include "chapters/methodology.typ"
 #include "chapters/implementation.typ"
 #include "chapters/results.typ"
-#include "chapters/background.typ"
+#include "chapters/discussion.typ"
 //-- back-matter
 // must take page breaks into account, may need to be offset by +1 or -1
 // #context counter(page).update(counter(page).at(<front-matter>).first())

@@ -4,6 +4,10 @@
 
 This section will give some theoretical background on the concepts and software used in this thesis
 
+== Thermal comfort
+From mean radiant temperature -> how people experience this. 
+
+
 == Urban features and thermal comfort
 - which urban features effect mean radiant temperature in cities (green & blue corridors?)
 

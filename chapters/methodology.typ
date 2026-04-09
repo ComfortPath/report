@@ -1,15 +1,131 @@
+#import "../template.typ": *
+
 = Methodology
 <methodology>
 
-This thesis has a design-based research approach, in which new insights will be generated through iterative design, implementation, and consequent evaluation of the functionalities. The final tool serves both as a result of the research and as a way to investigate strategies for integrating urban microclimate data into web-based routing applications.
+#todo(position: "inline")[*This chap should answer: what did I do as a research process, and how did I evaluate it*]
 
+== Research approach (contextualize study method)
+This thesis is working towards a reusable framework that can help researchers and developers make informed decisions when integrating UMC outputs into pedestrian routing tools. 
+To achieve this this thesis has a design-based research approach, in which new insights will be generated through iterative design, implementation, and consequent evaluation of the functionalities. The final tool serves both as a result of the research and as a way to investigate generalizable strategies for integrating urban microclimate data into web-based routing applications.
+- design-based research approach why:
+  - A routeplanner is a geosystem that has many components, all of which have their own challenges and impose limitations on the final result. Current research usually only delves into one of the elements, but rarely gives a complete overview of all implementation choices. This endangers the reusability and therefore scalability of the systems. This thesis aims to shine light on these technical foundations and identify in a very practical way which elements of development face which issues.  
+  - research gap was present in the technical implementation -> previous work was focussed on showing a tool like this is useful, this work focusses on how you can build the technical foundatations to make the tool scalable and extendible. Focussing on the entire pipeline from data collection to the web ui, by actually building the full system every element of development is considered.
+- The tool serves as a research artifact that is a result of the research and is evaluated on correctness. But also serves as a way to generate more generalizable stratagies for integrating UMC data in web-based routing applications. 
+
+The goal of this thesis is to expose the underlying sytems on which a routeplanner is built. To identify limitations and opportunities of all the separate elements and make concrete recommendations and give measurements that enable the scalability of this tool. 
+== Describe the study (document the research process)
+Why is the development of a environmental routeplanner useful, why does the tool answer the research question. 
+=== research steps
+1. Use a literature review to identify functional requirements for this routing tool. -> what should the algorithm look like, how do we run SOLWEIG effectively and what elements should the routeplanner have.
+
+2. Develop the tool? 
+
+3. Evaluate/reflect the routeplanner on correctness and usability.
+4. Reflect on the development process to gain generalizable insights. 
+=== data & tools
+- research area.
+- using data preparation from solfd
+  - what does the input data look like and what datasources are used for it
+- using SOLWEIG_GPU
+- using DelftBlue
+- osm
+-
+== Development of the routeplanner (describe in step-by-step)
+=== Data preperation
+==== pip package
+- developing pip package
+==== OSM to pedestrian network representation.
+- changing OSM to a pedestrian network.
+=== UMEP execution
+- Using SOLWEIG_GPU and ERA5 on an external machine -> DelftBlue
+- what outputs are useful for routing
+=== Integration within the pedestrian network
+- sampling technique
+- environmental factors as weights/cost
+=== Routing algorithm design
+- Using weighted dijkstra?
+- User defined 'importance' metrics -> 'do you wanna walk in the sun?'
+- combining all components
+=== Application
+- Prototype using Shiny
+- Why API between routing and GUI
+
+== Validation and evaluation of the routeplanner
+- functional validation: are outputs consitent, does it make sense in a pedestrian context. (this balance between level of detail etc) (evaluate routes/inputs)
+- intended purpose evaluation: are the routes significantly different, does it scale, is it easy to use and extend. (evaluate as a tool)
+- reflection on implementation choices: How do i come to recommendations
+
+== Limitations of this study design
+- No dataset to compare my routes to, no questionares to people that use them. 
+- many assumptions on how the world behaves
+- validation stratagy is limited and assumes that a lower temperature on the roads limits heat stress. 
+- any recommendations flowing from this are generalized as much as possible but stay in the realm of a route planner based on urban microclimate modelling.
+
+
+/*
+Q's this chapter should answer in the end:
+Why was a design-oriented approach chosen?
+What role does the tool play in answering the research question?
+What were the stages of development?
+What data, inputs, and assumptions were used?
+How was the tool tested or validated?
+How were lessons drawn from the design process?
+
+*/
+/*
+== Research design 
 The methodology is structured around four main phases, which are shown in @fig:overview_method.
 #figure(
   image("../figs/research_steps.png", width: 100%),
   caption: [
-    The 4 phases of this thesis
+    The 4 phases of this research
   ],
 ) <fig:overview_method>
+
+Explain the stages of the study, for example:
+analyze SOLWEIG outputs and routing requirements
+design a data transformation pipeline
+implement the routing prototype
+test and evaluate functionality, scalability, and usefulness
+derive generalizable recommendations/framework
+3.3 Data and case study
+Describe:
+study area
+SOLWEIG outputs used
+street network data
+any demographic, meteorological, or comfort threshold data
+software stack
+
+3.4 Methods for transformation and integration
+This is still methodology, not implementation in full technical detail.
+Here you explain conceptually:
+how microclimate rasters or grids are converted into routing cost information
+how costs are linked to pedestrian network segments
+how routing logic incorporates thermal comfort
+what assumptions you make
+3.5 Evaluation strategy
+Very important. Explain how you assess whether your approach works.
+For example:
+technical feasibility
+computational scalability
+quality of routing outputs
+interpretability or applicability of results
+usefulness of the framework for others
+== design rationale
+=== umepio (standardisation of data preperation)
+a modular, reproducible preprocessing component was required
+- the existing pipeline was fragmented, hard to reproduce, or difficult to scale
+-preparing SOLWEIG input data required multiple preprocessing steps that needed standardization
+- a modular package was needed to support openness, repeatability, and later integration into the routing workflow
+- packaging the pipeline was part of answering the research question, because data transformation is a necessary step between raw microclimate inputs and tertiary application outputs
+
+=== running solweig (SOLWEIG_GPU)
+
+
+This thesis has a design-based research approach, in which new insights will be generated through iterative design, implementation, and consequent evaluation of the functionalities. The final tool serves both as a result of the research and as a way to investigate strategies for integrating urban microclimate data into web-based routing applications.
+
+
 
 == Data preparation <data-preparation>
 #figure(
@@ -115,3 +231,4 @@ Existing literature has been evaluated to determine the best algorithm to be imp
 For routing, a tool like graphHopper or the OpenRouteService can be explored, since both implement an API to generate routes between cities. This is probably not necessary for the tool now, since it's only in one city.
 == Application
 OpenRouteService #footnote[https://openrouteservice.org]: open-source route planning tool implementing both a front-end and back-end. This was already used for pleasant routing by Foshag et al. (2024) and Novack et al. (2018) @foshag_how_2024 @novack_system_2018. GraphHopper also has an associated front-end, so this can also be explored.
+*/
