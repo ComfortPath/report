@@ -6,52 +6,106 @@
 #todo(position: "inline")[*This chap should answer: what did I do as a research process, and how did I evaluate it*]
 
 == Research approach (contextualize study method)
-This thesis is working towards a reusable framework that can help researchers and developers make informed decisions when integrating UMC outputs into pedestrian routing tools. 
-To achieve this this thesis has a design-based research approach, in which new insights will be generated through iterative design, implementation, and consequent evaluation of the functionalities. The final tool serves both as a result of the research and as a way to investigate generalizable strategies for integrating urban microclimate data into web-based routing applications.
-- design-based research approach why:
-  - A routeplanner is a geosystem that has many components, all of which have their own challenges and impose limitations on the final result. Current research usually only delves into one of the elements, but rarely gives a complete overview of all implementation choices. This endangers the reusability and therefore scalability of the systems. This thesis aims to shine light on these technical foundations and identify in a very practical way which elements of development face which issues.  
-  - research gap was present in the technical implementation -> previous work was focussed on showing a tool like this is useful, this work focusses on how you can build the technical foundatations to make the tool scalable and extendible. Focussing on the entire pipeline from data collection to the web ui, by actually building the full system every element of development is considered.
-- The tool serves as a research artifact that is a result of the research and is evaluated on correctness. But also serves as a way to generate more generalizable stratagies for integrating UMC data in web-based routing applications. 
+The goal of this thesis is to investigate how urban microclimate (UMC) outputs can be integrated into pedestrian routing tools in a way that is open-source, scalable, and reusable. To do this this thesis applies a Design Science Methodology (DSM), with which knowledge is derived from the development of an artifact @runeson_design_2020 @wohlin_design_2021. This pedestrian routing tool thus serves as both a result of the research and as a way to investigate generalizable strategies for integrating urban microclimate data into web-based routing applications.
 
-The goal of this thesis is to expose the underlying sytems on which a routeplanner is built. To identify limitations and opportunities of all the separate elements and make concrete recommendations and give measurements that enable the scalability of this tool. 
+DSM lends itself to this problem because this type of routeplanner is a complex system depending on multiple interconnected components, each whith its own technical challenges and constraints. For each of these components the design logic is applied by defining: problem conceptualisation, solution design and evaluation @wohlin_design_2021.  This thesis systamatically examines the seperate components, identifying practical bottlenecks, trade-offs and implementation choices that shape the final tool. These insights can then be used in further research which employs UMEP outputs or builds a similar routing tool. 
+
 == Describe the study (document the research process)
-Why is the development of a environmental routeplanner useful, why does the tool answer the research question. 
+<research-steps>
+Existing research has shown the possibility and usefulness of themally informed routing, but paid less attention to the technical foundantions. This thesis adresses this gap by considering the full pipline of the components which make up a route planner. Building the full system allows for evaluation of the final tool, but also generates insights for technical limitations and opportunities found during development. 
+
 === research steps
-1. Use a literature review to identify functional requirements for this routing tool. -> what should the algorithm look like, how do we run SOLWEIG effectively and what elements should the routeplanner have.
+#todo(position: "inline")[step 2 is by far the biggest, change to match at the end]
+In broad steps these are the stages the research went through:
+1. A literature review is conducted to identify the functional requirements of the routing tool. This review informs the core components of the application, the role of SOLWEIG in the workflow, and the desired routing logic.
 
-2. Develop the tool? 
+2. The route planner is developed iteratively by treating its main stages as separate but connected design components. This allows each component to be designed, analysed, and refined before being integrated into the complete system.
 
-3. Evaluate/reflect the routeplanner on correctness and usability.
-4. Reflect on the development process to gain generalizable insights. 
-=== data & tools
-- research area.
+3. The resulting route planner is evaluated with regard to its correctness and practical usability.
+
+4. The development process is reflected upon to identify key challenges, trade-offs, and effective implementation choices. These reflections are used to derive broader insights and practical recommendations for future UMC-informed routing applications.
+
+=== Data & tools
+For testing a bounding box was chosen of a neighbourhood in Rotterdam with varying urban features: green & blue corridors, parks and different types of roads. As displayed in @fig:bbox the bounding box spans about 2.5 kilometers north and 2 kilometers east to west. This is to limit the calculation time for SOLWEIG and data download. An area of this size allows for in depth testing without great demands on runtime. 
+
+#figure(
+  image("../figs/methods/testing_area.png", width: 80%),
+  caption: [
+    Red bounding box area for testing
+  ],
+) <fig:bbox>
+#table(
+  columns: (1fr, auto, auto),
+  inset: 10pt,
+  align: horizon,
+  table.header(
+    [], [*left lower corner*], [*right top corner*],
+  ),
+  [WSG84 (lat/long)],
+  [51°52'46.75"/4°27'39.74"],
+  [51°53'48.48"/4°28'59.42"],
+  [RDNEW],
+  [(91229,432752)],
+  [(92777,434641)]
+)
 - using data preparation from solfd
   - what does the input data look like and what datasources are used for it
 - using SOLWEIG_GPU
 - using DelftBlue
-- osm
--
-== Development of the routeplanner (describe in step-by-step)
+- OSM
+- UMEP
+== Development of the routeplanner 
+#todo(position: "inline")[Relate to RQ's. Currently this is too seperate from them.]
+// reason being: the sub RQ's as they are now are maybe a little too oriented on  the routeplanner as an outcome than the development of concrete recommendations.
+To ensure the insights gathered in this thesis are as broadly applicable as possible, the components are developed and evaluated seperately. In existing research there is a wide variety of methodologies, suggesting that there are multiple valid ways of building a tool like this. By separating the research into component-level design elements, the findings associated with each part can be applied flexibly across different methodological contexts.
+
+Each component is framed as a specific problem–solution pair, where the problem statements are derived from approaches in existing literature and evaluating them against the desired software property of scalability. The proposed solutions are informed both by existing literature and by insights gained in earlier development stages.#todo[At the end: is this what I've acutally done?] The validation of these individual design elements is described in @validation.
+
 === Data preperation
+- existing literature: loads of different sources of input data -> environmental information gathered through a variety of sources, some of which are not accessible. -> difficult to scale.  
+- solution: use minimal open input data and UMEP 
+- how: Use SOLFD data preperation framwork developed by Monohan @monahan_cool_2025 that automatically generates 
+- ease of access
+-> standardizes (for the dutch context )
 ==== pip package
-- developing pip package
-==== OSM to pedestrian network representation.
-- changing OSM to a pedestrian network.
+- problem: usability of code reduces by the way it is distributed, only having this framwork available as sections of code in a github repository greatly limits the reusability
+- Solution: publish the code as a public pip package, especially since the automatic collection of this data could be used for more analyses than just running SOLWEIG.
+- How: implement what is described above...
+
+==== OSM to pedestrian network representation
+*Not really discussed in existing research*
+- problem: there are general limitations to using the OSM -> describe them here?
+- solution: mitigation of the consequencces by clearly documenting the (lack of)availability of certain tags & going into detail on the test area
+- special case since the 'true fix' does not exist, there is no prefect input data. 
+
 === UMEP execution
+- Problem: UMEP's SOLWEIG takes forever to run and the ouputs are gigantic.
+- test two solutions: general & specific
+how:
+- general: test runtimes for collecting data using UMEPIO -> invesitgate feasibility of runnign UMEP on demand when having a GPU speed-up and pedestrian lenght route (not likely longer than 2km)
+- specialization: offload runtime to fast external machine, compute available at university. Deal with the gigantic size by folding information into pedestrian network (context specific possibility).
 - Using SOLWEIG_GPU and ERA5 on an external machine -> DelftBlue
 - what outputs are useful for routing
+
 === Integration within the pedestrian network
+* not really discussed in research*
+- Problem: how can attach weights to the edges that summerize the UMEP outputs to the edges. In technical sense, raster needs to fit into memory for lookup. Context: the rastercells are flattened into one value for a single edge (what's the best way). 
+- Solution: implement it?? Sampling should be described. 
 - sampling technique
 - environmental factors as weights/cost
 === Routing algorithm design
+problem: algorithm should be dynamic -> as a pedestrian walks the length of being in heat is increasingly bothersome.  Algorithm should not just have researcher defined weights, since the situation can change for different user preferences. 
 - Using weighted dijkstra?
 - User defined 'importance' metrics -> 'do you wanna walk in the sun?'
 - combining all components
 === Application
+*Not done or discussed in most research papers*
 - Prototype using Shiny
 - Why API between routing and GUI
 
-== Validation and evaluation of the routeplanner
+== Validation and evaluation of the routeplanner (analyzing the data)
+<validation>
+Runeson et al. note that insights from design-based research are inherently context based @runeson_design_2020. 
 - functional validation: are outputs consitent, does it make sense in a pedestrian context. (this balance between level of detail etc) (evaluate routes/inputs)
 - intended purpose evaluation: are the routes significantly different, does it scale, is it easy to use and extend. (evaluate as a tool)
 - reflection on implementation choices: How do i come to recommendations
