@@ -1,14 +1,58 @@
 #import "../template.typ": *
+/*
+struct:
 
+Full tool.
+separate connected componenets
+
+
+
+*/
 = Methodology
-<methodology>
-
+<chap:methodology>
 #todo(position: "inline")[*This chap should answer: what did I do as a research process, and how did I evaluate it*]
+This section first describes the research approach, which contextualizes the method used in this thesis using methodologies described in literature. Secondly, the study itself is described in large(r) steps. Then the data and tools which were used are described. Finally the seperate software componenets of the final are described.
 
+
+
+
+The idea of reflexivity can be especially useful in grouding this methodology. As described by...
+@van_rensburg_model_2019 : formalizing the process of generating knowledge through the production of design based research.
+In addition, this thesis adopts a reflexive perspective on the design process, recognising that the researcher’s position as designer and implementer influenced both the development of the artefact and the direction of the inquiry.
+
+Design science research for software engineering is rooted in practicallity, where the contribution of the research stems from it's ability to solve a problem @runeson_design_2020. This idea is encompassed in the concept of utility as described by Hevner et al. "If the artifact does not solve the problem (search, implementability), it has no utility. If utility is not demonstrated (evaluation), then there is no basis upon which to accept the claims that it provides any contribution (contribution" @hevner_utility_2004.
+- utility of the artifact; scalability, 
+- 
+- 
 == Research approach (contextualize study method)
+This thesis adopts a Design Science Research (DSR) methodology in which knowledge is generated through the iterative design, implementation, and evaluation of an artefact @runeson_design_2020 @wohlin_design_2021. Here that artefact is a open-source pedestrian routing tool that uses UMEP outputs to generate routes that avoid heat stress. The final tool serves both as a result of the research and as a way to investigate strategies for integrating urban microclimate data into web-based routing applications. To ensure that the design process yields generalizable insights, systematic evaluation is conducted throughout all stages of development @van_rensburg_model_2019.
+
+@fig:methods shows how reflecive DSR is applied in this thesis. 
+#figure(
+  image("../figs/methods/methods_diagram.png", width: 80%),
+  caption: [
+    Overview methodological approach
+  ],
+) <fig:methods> 
+
+First literature is used to conceptualise the problem and identify the main design requirements. Then a solution is designed, which is validated according to the requirements from literature. After which reflexive evaluation is used to readjust the problem conceptualization and requirements for the next design iteration. 
+
+This iterative process reflects the practical orientation of design science research for software engineering, where the contribution of the research stems from its ability to solve a problem @runeson_design_2020. This idea is encompassed in the concept of utility, as described by Hevner et al.:_“If the artifact does not solve the problem (search, implementability), it has no utility. If utility is not demonstrated (evaluation), then there is no basis upon which to accept the claims that it provides any contribution”_ @hevner_utility_2004.
+
+At the same time, utility is not assessed only through formal validation against predefined requirements.
+
+At the same time, the figure shows that this research process was not strictly linear. Rather than moving once from literature to design and then to final validation, the study developed iteratively and emergently. Emergent research design refers here to the idea that relevant questions, constraints, and priorities cannot always be fully determined in advance, but may change as new insights arise during implementation. This is reflected in the feedback loops in Figure X, where evaluation does not only assess the proposed solution, but can also lead to a reformulation of the problem or an adjustment of the criteria by which later iterations are judged. This was particularly relevant in the development of the routing tool, where implementation revealed practical bottlenecks, data limitations, and technical trade-offs that could not be fully anticipated from the literature alone.
+
+For that reason, the methodology also includes a reflexive form of evaluation, shown in the lower part of Figure X. Reflexive evaluation means that the research does not only consider whether a design works, but also what is learned through the process of making and testing it. In this thesis, that includes reflection on how implementation choices, the expertise and decisions of the researcher, and newly encountered obstacles influenced both the development of the artefact and the direction of the inquiry. Reflexivity is therefore used to make explicit how knowledge was generated not only through formal validation, but also through iterative engagement with the design process itself. Taken together, Figure X represents the methodology of this thesis as a design-oriented, iterative, and reflexive process in which literature, implementation, validation, and reflection continuously informed one another.
+
+- describe Design science: problem, solution suggestion, validation
+- emergent research -> durign the development allow for new concepts and directions to arise
+- itertive: large role for the expertise of the implementer. reflexivity is particularly applicable for this type of research
+- knowledge generation through making -> addition of reflection 
+
 The goal of this thesis is to investigate how urban microclimate (UMC) outputs can be integrated into pedestrian routing tools in a way that is open-source, scalable, and reusable. To do this this thesis applies a Design Science Methodology (DSM), with which knowledge is derived from the development of an artifact @runeson_design_2020 @wohlin_design_2021. This pedestrian routing tool thus serves as both a result of the research and as a way to investigate generalizable strategies for integrating urban microclimate data into web-based routing applications.
 
-DSM lends itself to this problem because this type of routeplanner is a complex system depending on multiple interconnected components, each whith its own technical challenges and constraints. For each of these components the design logic is applied by defining: problem conceptualisation, solution design and evaluation @wohlin_design_2021.  This thesis systamatically examines the seperate components, identifying practical bottlenecks, trade-offs and implementation choices that shape the final tool. These insights can then be used in further research which employs UMEP outputs or builds a similar routing tool. 
+DSR lends itself to this problem because this type of routeplanner is a complex system depending on multiple interconnected components, each whith its own technical challenges and constraints. For each of these components the design logic is applied by defining: problem conceptualisation, solution design and evaluation @wohlin_design_2021.  This thesis systamatically examines the seperate components, identifying practical bottlenecks, trade-offs and implementation choices that shape the final tool. These insights can then be used in further research which employs UMEP outputs or builds a similar routing tool. 
 
 == Describe the study (document the research process)
 <research-steps>
@@ -17,13 +61,13 @@ Existing research has shown the possibility and usefulness of themally informed 
 === research steps
 #todo(position: "inline")[step 2 is by far the biggest, change to match at the end]
 In broad steps these are the stages the research went through:
-1. A literature review is conducted to identify the functional requirements of the routing tool. This review informs the core components of the application, the role of SOLWEIG in the workflow, and the desired routing logic.
+1. A literature review is conducted to identify the functional requirements of the routing tool. This review informs the core components of the application, the role of SOLWEIG in the workflow, and the desired routing logic. It also estabishes starting metrics with which the elements are evaluated.
 
-2. The route planner is developed iteratively by treating its main stages as separate but connected design components. This allows each component to be designed, analysed, and refined before being integrated into the complete system.
+2. The route planner is developed iteratively by treating its main stages as separate but connected design components. This allows each component to be designed, analysed, and refined before being integrated into the complete system. Here the emergent nature of the research leaves room for new metrics of evaluation and directions of enquiry as the implementation develops.
 
-3. The resulting route planner is evaluated with regard to its correctness and practical usability.
+3. As is common in DSR the resulting route planner is evaluated with regard to its utility and the metrics derived from the literature review. With utility being defined as practical and goal oriented; how well does the tool do what it's supposed to do.  
 
-4. The development process is reflected upon to identify key challenges, trade-offs, and effective implementation choices. These reflections are used to derive broader insights and practical recommendations for future UMC-informed routing applications.
+4. The development process is reflected upon to identify key challenges, trade-offs, and effective implementation choices. Using the reflexive method, by building on the expertise of the reseracher. #todo[describe reflexive method] These reflections are used to derive broader insights and practical recommendations for future UMC-informed routing applications. Which are (part of) the results of this thesis and described in that chapter.
 
 === Data & tools
 For testing a bounding box was chosen of a neighbourhood in Rotterdam with varying urban features: green & blue corridors, parks and different types of roads. As displayed in @fig:bbox the bounding box spans about 2.5 kilometers north and 2 kilometers east to west. This is to limit the calculation time for SOLWEIG and data download. An area of this size allows for in depth testing without great demands on runtime. 
@@ -72,6 +116,8 @@ Each component is framed as a specific problem–solution pair, where the proble
 - Solution: publish the code as a public pip package, especially since the automatic collection of this data could be used for more analyses than just running SOLWEIG.
 - How: implement what is described above...
 
+
+
 ==== OSM to pedestrian network representation
 *Not really discussed in existing research*
 - problem: there are general limitations to using the OSM -> describe them here?
@@ -93,13 +139,14 @@ how:
 - Solution: implement it?? Sampling should be described. 
 - sampling technique
 - environmental factors as weights/cost
-=== Routing algorithm design
+
+
+=== Routing Prototype
 problem: algorithm should be dynamic -> as a pedestrian walks the length of being in heat is increasingly bothersome.  Algorithm should not just have researcher defined weights, since the situation can change for different user preferences. 
 - Using weighted dijkstra?
 - User defined 'importance' metrics -> 'do you wanna walk in the sun?'
 - combining all components
-=== Application
-*Not done or discussed in most research papers*
+Application: not really problem, more of a tool for communitcation & testing.
 - Prototype using Shiny
 - Why API between routing and GUI
 
