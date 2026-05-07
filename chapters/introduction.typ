@@ -16,6 +16,10 @@ Tools like UMEP have primarily been used for research and long-term urban planni
 
 Previous work on thermal comfort-oriented routing is characterized by differing methodologies, both in input data collection and routing algorithm design (@rout-env). These differences are partly caused by the data (or lack thereof) that was available for researchers to collect or use. Additionally, much of the existing research focuses primarily on demonstrating that comfortable routes can offer measurable benefits. Which provides important proof of concept insights. However, there has been less emphasis on the reproducibility, scalability, and openness of the underlying systems. As a result, most of the proposed approaches are either difficult to transfer across cities or have not been implemented in user-facing applications at all.
 
+With Ma et al. (2025) indicating that "Finally, the high computational intensity of using ENVI-met to predict PET values and using DFS to identify routes presents a significant challenge for real-world applications, necessitating more computationally efficient methodologies (Ma et al., 2025b; Yu et al., 2025) to enhance the practicality and scalability of the approach." @ma_active_2025
+
+This thesis aims to show that technical implementation details can greatly impact the required computation time and thus practicallity and scalibility of these systems. But differign methodologies can also provide wins @ma_street_2025, for example using machine learning. 
+
 This thesis addresses these limitations by focusing on the development of a fully open-source tool for thermally comfortable pedestrian routing. First, the challenge of environmental data availability is addressed through the use of UMEP to model mean radiant temperature and wind. Secondly, this thesis will document and investigate the best practices on how to incorporate complex urban microclimate data in a scalable and accessible user-facing tool.
 
 = Research questions and scope

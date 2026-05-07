@@ -1,33 +1,14 @@
 #import "../template.typ": *
-/*
-struct:
 
-Full tool.
-separate connected componenets
-
-
-
-*/
 = Methodology
 <chap:methodology>
-#todo(position: "inline")[*This chap should answer: what did I do as a research process, and how did I evaluate it*]
-This section first describes the research approach, which contextualizes the method used in this thesis using methodologies described in literature. Secondly, the study itself is described in large(r) steps. Then the data and tools which were used are described. Finally the seperate software componenets of the final are described.
-
-
-
-
-The idea of reflexivity can be especially useful in grouding this methodology. As described by...
-@van_rensburg_model_2019 : formalizing the process of generating knowledge through the production of design based research.
-In addition, this thesis adopts a reflexive perspective on the design process, recognising that the researcher’s position as designer and implementer influenced both the development of the artefact and the direction of the inquiry.
-
-Design science research for software engineering is rooted in practicallity, where the contribution of the research stems from it's ability to solve a problem @runeson_design_2020. This idea is encompassed in the concept of utility as described by Hevner et al. "If the artifact does not solve the problem (search, implementability), it has no utility. If utility is not demonstrated (evaluation), then there is no basis upon which to accept the claims that it provides any contribution (contribution" @hevner_utility_2004.
-- utility of the artifact; scalability, 
-- 
-- 
+#todo(position: "inline")[*This chap should answer: what did I do as a research process, what does the tool look like and how did I evaluate everything*]
+This section first describes the research approach, which contextualizes the method used in this thesis using methodologies described in literature. Secondly, the study itself is described in large(r) steps. Then the data and tools which were used are described. Finally the separate software components of the final are described.
+ 
 == Research approach (contextualize study method)
-This thesis adopts a Design Science Research (DSR) methodology in which knowledge is generated through the iterative design, implementation, and evaluation of an artefact @runeson_design_2020 @wohlin_design_2021. Here that artefact is a open-source pedestrian routing tool that uses UMEP outputs to generate routes that avoid heat stress. The final tool serves both as a result of the research and as a way to investigate strategies for integrating urban microclimate data into web-based routing applications. To ensure that the design process yields generalizable insights, systematic evaluation is conducted throughout all stages of development @van_rensburg_model_2019.
+This thesis adopts a Design Science Research (DSR) methodology in which knowledge is generated through the iterative design, implementation, and evaluation of an artefact @runeson_design_2020 @wohlin_design_2021. Here that artefact is a open-source pedestrian routing tool that uses UMEP outputs to generate routes that avoid heat stress #todo[ensure consistency with rest of thesis]. The final tool serves both as a result of the research and as a way to investigate strategies for integrating urban microclimate data into web-based routing applications. To ensure that the design process yields generalizable insights, systematic evaluation is conducted throughout all stages of development @van_rensburg_model_2019.
 
-@fig:methods shows how reflecive DSR is applied in this thesis. 
+@fig:methods shows how reflective DSR is applied in this thesis. 
 #figure(
   image("../figs/methods/methods_diagram.png", width: 80%),
   caption: [
@@ -35,42 +16,31 @@ This thesis adopts a Design Science Research (DSR) methodology in which knowledg
   ],
 ) <fig:methods> 
 
-First literature is used to conceptualise the problem and identify the main design requirements. Then a solution is designed, which is validated according to the requirements from literature. After which reflexive evaluation is used to readjust the problem conceptualization and requirements for the next design iteration. 
+First literature is used to conceptualize the problem and identify the main design requirements. Then a solution is designed, which is validated according to the previously defined requirements. After which reflexive evaluation is used to readjust the problem conceptualization and requirements for the next design iteration. 
 
-This iterative process reflects the practical orientation of design science research for software engineering, where the contribution of the research stems from its ability to solve a problem @runeson_design_2020. This idea is encompassed in the concept of utility, as described by Hevner et al.:_“If the artifact does not solve the problem (search, implementability), it has no utility. If utility is not demonstrated (evaluation), then there is no basis upon which to accept the claims that it provides any contribution”_ @hevner_utility_2004.
+This process reflects the practical orientation of design science research for software engineering. Where the contribution of the research stems from its ability to solve a problem @runeson_design_2020. This idea is encompassed in the concept of utility, as described by Hevner et al.:_“If the artifact does not solve the problem (search, implementability), it has no utility. If utility is not demonstrated (evaluation), then there is no basis upon which to accept the claims that it provides any contribution”_ @hevner_utility_2004.
 
-At the same time, utility is not assessed only through formal validation against predefined requirements.
+Utility is not only achieved through formal validation against predefined requirements, but also through insights generated by the iterative process with which the final tool is built. To place these insights into context we need to explicitly mention the role of the researcher/designer. The tool is designed through a "sequence of expert activities" @hevner_utility_2004, so even design iterations that were later upended can teach us something about how these systems are usually developed. In social sciences Finlay (2002) describes this position as "where researchers engage in explicit, self-aware analysis of their own role" and calls this reflexivity @finlay_outing_2002. In this thesis explicitly acknowledges that the expertise of the researcher shapes both the final tool but also the direction of inquiry. And draws generalized lessons not just from the final tool, but also the entire process of inquiry. Acknowledging that the fact that the researcher (who has expertise) decided on a course of action provides information on how assumptions and descriptions from previous research can shape the Initial implementation choice.
 
-At the same time, the figure shows that this research process was not strictly linear. Rather than moving once from literature to design and then to final validation, the study developed iteratively and emergently. Emergent research design refers here to the idea that relevant questions, constraints, and priorities cannot always be fully determined in advance, but may change as new insights arise during implementation. This is reflected in the feedback loops in Figure X, where evaluation does not only assess the proposed solution, but can also lead to a reformulation of the problem or an adjustment of the criteria by which later iterations are judged. This was particularly relevant in the development of the routing tool, where implementation revealed practical bottlenecks, data limitations, and technical trade-offs that could not be fully anticipated from the literature alone.
-
-For that reason, the methodology also includes a reflexive form of evaluation, shown in the lower part of Figure X. Reflexive evaluation means that the research does not only consider whether a design works, but also what is learned through the process of making and testing it. In this thesis, that includes reflection on how implementation choices, the expertise and decisions of the researcher, and newly encountered obstacles influenced both the development of the artefact and the direction of the inquiry. Reflexivity is therefore used to make explicit how knowledge was generated not only through formal validation, but also through iterative engagement with the design process itself. Taken together, Figure X represents the methodology of this thesis as a design-oriented, iterative, and reflexive process in which literature, implementation, validation, and reflection continuously informed one another.
-
-- describe Design science: problem, solution suggestion, validation
-- emergent research -> durign the development allow for new concepts and directions to arise
-- itertive: large role for the expertise of the implementer. reflexivity is particularly applicable for this type of research
-- knowledge generation through making -> addition of reflection 
-
-The goal of this thesis is to investigate how urban microclimate (UMC) outputs can be integrated into pedestrian routing tools in a way that is open-source, scalable, and reusable. To do this this thesis applies a Design Science Methodology (DSM), with which knowledge is derived from the development of an artifact @runeson_design_2020 @wohlin_design_2021. This pedestrian routing tool thus serves as both a result of the research and as a way to investigate generalizable strategies for integrating urban microclimate data into web-based routing applications.
-
-DSR lends itself to this problem because this type of routeplanner is a complex system depending on multiple interconnected components, each whith its own technical challenges and constraints. For each of these components the design logic is applied by defining: problem conceptualisation, solution design and evaluation @wohlin_design_2021.  This thesis systamatically examines the seperate components, identifying practical bottlenecks, trade-offs and implementation choices that shape the final tool. These insights can then be used in further research which employs UMEP outputs or builds a similar routing tool. 
+The iterative design process makes this research emergent; "Emergent design involves data collection and analysis procedures that can evolve over the course of a research project in response to what is learned in the earlier parts of the study"  @morgan_emergent_2008. This means that insights gained during the process can change and are expected to shape the direction of inquiry. 
 
 == Describe the study (document the research process)
 <research-steps>
-Existing research has shown the possibility and usefulness of themally informed routing, but paid less attention to the technical foundantions. This thesis adresses this gap by considering the full pipline of the components which make up a route planner. Building the full system allows for evaluation of the final tool, but also generates insights for technical limitations and opportunities found during development. 
+Existing research has shown the possibility and usefulness of thermally informed routing @foshag_how_2024 @ma_active_2025 @rusig_reducing_2017 @wen_walking_smart_2025, but paid less attention to the technical foundations. This thesis addresses this gap by considering the full pipeline of the components which make up a route planner. Building the full system allows for evaluation of the final tool, but also generates insights for technical limitations and opportunities found during development. 
 
 === research steps
-#todo(position: "inline")[step 2 is by far the biggest, change to match at the end]
+#todo(position: "inline")[step 2 is by far the biggest, change to match at the end/ maybe this section just gives double info]
 In broad steps these are the stages the research went through:
-1. A literature review is conducted to identify the functional requirements of the routing tool. This review informs the core components of the application, the role of SOLWEIG in the workflow, and the desired routing logic. It also estabishes starting metrics with which the elements are evaluated.
+1. A literature review was conducted to identify the functional requirements of the routing tool. This review informs the core components of the application, the role of SOLWEIG in the workflow, and the desired routing logic. It also establishes starting technical requirements with which the elements are evaluated.
 
-2. The route planner is developed iteratively by treating its main stages as separate but connected design components. This allows each component to be designed, analysed, and refined before being integrated into the complete system. Here the emergent nature of the research leaves room for new metrics of evaluation and directions of enquiry as the implementation develops.
+2. The route planner is developed iteratively by treating its main stages as separate but connected design components. This allows each component to be designed, analysed, and refined before being integrated into the complete system. Here the emergent nature of the research leaves room for new requirements and directions of inquiry as the implementation develops.
 
-3. As is common in DSR the resulting route planner is evaluated with regard to its utility and the metrics derived from the literature review. With utility being defined as practical and goal oriented; how well does the tool do what it's supposed to do.  
+3. As is common in DSR the resulting route planner is evaluated with regard to its utility and the requirements derived from the literature review. With utility being practical and goal oriented; how well does the tool do what it's supposed to do. And how well does it achieve the technical requirements.
 
-4. The development process is reflected upon to identify key challenges, trade-offs, and effective implementation choices. Using the reflexive method, by building on the expertise of the reseracher. #todo[describe reflexive method] These reflections are used to derive broader insights and practical recommendations for future UMC-informed routing applications. Which are (part of) the results of this thesis and described in that chapter.
+4. The development process is reflected upon to identify key challenges, trade-offs, and effective implementation choices. These reflections are used to derive broader insights and practical recommendations for future UMC-informed routing applications. Which are (part of) the results of this thesis and described in that chapter.
 
 === Data & tools
-For testing a bounding box was chosen of a neighbourhood in Rotterdam with varying urban features: green & blue corridors, parks and different types of roads. As displayed in @fig:bbox the bounding box spans about 2.5 kilometers north and 2 kilometers east to west. This is to limit the calculation time for SOLWEIG and data download. An area of this size allows for in depth testing without great demands on runtime. 
+For the creation of the tool a bounding box was chosen of a neighbourhood in Rotterdam with varying urban features: green & blue corridors, parks and different types of roads. As displayed in @fig:bbox the bounding box spans about 2.5 kilometers north and 2 kilometers east to west. This is to limit the calculation time for SOLWEIG and data download. An area of this size allows for in depth testing without great demands on runtime. 
 
 #figure(
   image("../figs/methods/testing_area.png", width: 80%),
@@ -95,67 +65,232 @@ For testing a bounding box was chosen of a neighbourhood in Rotterdam with varyi
 - using data preparation from solfd
   - what does the input data look like and what datasources are used for it
 - using SOLWEIG_GPU
+- ERA5
 - using DelftBlue
 - OSM
 - UMEP
 == Development of the routeplanner 
 #todo(position: "inline")[Relate to RQ's. Currently this is too seperate from them.]
 // reason being: the sub RQ's as they are now are maybe a little too oriented on  the routeplanner as an outcome than the development of concrete recommendations.
-To ensure the insights gathered in this thesis are as broadly applicable as possible, the components are developed and evaluated seperately. In existing research there is a wide variety of methodologies, suggesting that there are multiple valid ways of building a tool like this. By separating the research into component-level design elements, the findings associated with each part can be applied flexibly across different methodological contexts.
+To ensure the insights gathered in this thesis are as broadly applicable as possible, the components are developed and evaluated separately. In existing research there is a wide variety of methodologies, suggesting that there are multiple valid ways of building a tool like this. By separating the research into component-level design elements, the findings associated with each part can be applied flexibly in different methodological contexts.
 
-Each component is framed as a specific problem–solution pair, where the problem statements are derived from approaches in existing literature and evaluating them against the desired software property of scalability. The proposed solutions are informed both by existing literature and by insights gained in earlier development stages.#todo[At the end: is this what I've acutally done?] The validation of these individual design elements is described in @validation.
+Each component is framed as a problem–solution pair, where the problem statements are derived from approaches in existing literature and evaluating them against the desired software property of scalability. The proposed solutions are informed both by existing literature and by insights gained in earlier development stages.#todo[At the end: is this what I've actually done?] 
 
-=== Data preperation
-- existing literature: loads of different sources of input data -> environmental information gathered through a variety of sources, some of which are not accessible. -> difficult to scale.  
-- solution: use minimal open input data and UMEP 
-- how: Use SOLFD data preperation framwork developed by Monohan @monahan_cool_2025 that automatically generates 
-- ease of access
--> standardizes (for the dutch context )
-==== pip package
-- problem: usability of code reduces by the way it is distributed, only having this framwork available as sections of code in a github repository greatly limits the reusability
-- Solution: publish the code as a public pip package, especially since the automatic collection of this data could be used for more analyses than just running SOLWEIG.
-- How: implement what is described above...
+The final description in the methodology represents the state after the multiple design iterations. Where applicable the emergent design process is represented by tables showing initial approach, the bottleneck it introduced, and how the approach was revised. More information on these changes can be found in Appendix #todo[make more detailed tables]A. For some elements the initial direction and approach gathered from literature proved sufficient and no revision was necessary to come to the final product.
 
+=== The pedestrian routing tool
+==== Purpose & structure
+
+
+The final tool is a pedestrian route planner that uses urban microclimate model outputs to generate thermally informed walking routes. Instead of calculating only the shortest route, the tool allows these modelled thermal conditions to influence the cost of walking along a certain road. This combines into a Dijkstra routing algorithm that chooses a least-cost route that balances heat exposure and distance.  
+
+The tool has a modular structure, where separate components are all part of the pipeline that make up the pedestrian route planner (see @fig:tool). First, spatial input data are prepared for the selected study area. Consisting of the OSM pedestrian #todo[first mention of OSM but explained in next section?] network and the necessary SOLWEIG input data. Then SOLWEIG was run, which produces the UTCI, TMRT and shade maps per hour. These are linked to the OSM pedestrian network by assigning environmental values derived from the SOLWEIG output maps to the edges. Finally, the routing prototype has an algorithm that these weighted edges to calculate thermally conscious routes and a web-based display that allows the user to access the information.
+
+Finally, the scalability of the tool was tested by running the entire pipeline for another area in rotterdam and evaluating the differences. #todo[More concretely describe these tests once they are done. ]
+
+#figure(
+  image("../figs/methods/tool_descrip.png", width: 100%),
+  caption: [
+    Overview of different tool modules
+  ],
+) <fig:tool>
+==== Requirements
+- describe requirements:
+  - scalability 
+  - performance
+  - modularity
+- component based design that supports reusability #todo[write this]
+ 
+#table(
+  columns: 3,
+  table.header[*Initial approach*][*Bottleneck*][*Revised*],
+  [Ease of use, performance, scalability],
+  [strong coupling #footnote[Coupling is a term used in software design that describes how dependent software modules are on each other. High coupling means that changes in one module of the software can have big effects on other modules. Low coupling means that the modules are largely independent from each other.]  between components introduces performance bottlenecks],
+  [modular system design with high cohesion #footnote[Cohesion is closely related to coupling and refers to how well all the elements in a module are supporting a single well defined purpose. For reusability low coupling and high cohesion is preferred.] that supports reusability],
+)
+=== Data preparation
+The first component consisted of gathering the pedestrian network from the OSM and the input data for SOLWEIG. Existing research on thermally comfortable routing differs widely in how the input data is collected, and which data is considered in the first place. Largely constrained by data availability. The solution for this problem adopted in this thesis is to use UMC modelling which requires more simplistic input information. This makes the entire workflow more scalable.
+
+==== UMEPIO
+Monahan (2025) developed SOLFD which has an automated pipeline to gather all necessary input data that is needed to run SOLWEIG. However, this pipeline was only available as separate sections of code in a GitHub repository, so its practical reusability remained limited. To ensure scalability the collection and preparation of input data should require as little manual labour as possible. SOLWEIG requires several spatial input layers, including CHM, DSM, DTM and Landcover rasters. When these are collected and processed manually, the workflow becomes time-consuming and more vulnerable to human error.
+
+#show link: underline
+Which is why the pipeline in SOLFD was published as a pip package; #link("https://pypi.org/project/umepio/")[UMEPIO]. In addition to the reduction in manual effort (and the time that takes) and increased standardisation #todo[make connection more natural], publication in a pip package supports reusability in other contexts than a route planner. Supporting the design goals of scalability and reusability.
 
 
 ==== OSM to pedestrian network representation
 *Not really discussed in existing research*
-- problem: there are general limitations to using the OSM -> describe them here?
-- solution: mitigation of the consequencces by clearly documenting the (lack of)availability of certain tags & going into detail on the test area
-- special case since the 'true fix' does not exist, there is no prefect input data. 
 
+Two main data sources were considered for this step. The first option was OpenStreetMap, which is commonly used in routing research because it is open, widely available, and accessible through established tools such as OSMnx. The second option was Overture Maps, which provides cloud-native and normalised geospatial data and might be preferable in terms of scalability. #todo[maybe remove information about overture to the table in the appendix & the table above]
+
+However, manual inspection of the study area showed that some less standard tags were lost in the Overture dataset. In particular for pedestrian infrastructure, sidewalk-related tags were lost. While sidewalk data in OpenStreetMap is not complete or consistently available, the presence of these tags can still improve the closeness of the representation to the real world. Since pedestrians do not use the center-lines of the road, but the sides. For this reason, retaining this information was considered more important than using a more normalised network source.
+
+The final workflow therefore uses plain OpenStreetMap data, gathered through OSMnx #footnote[OSMnx is a python package that downloads OSM data into a NetworkX representation, allowing for easy access to the data.], as the basis for the transportation network. This choice makes it possible to preserve the sidewalk information. This decision is important because the pedestrian network is not only used for routing, but also for linking SOLWEIG outputs to the walking environment. The location of network edges influence which raster values are sampled so a close representation is crucial for a good representation. Keeping this information allows for further analysis and prevents unnoticed loss of detail.
+
+A custom filtering was applied to gather the pedestrian network from the OSM since the OSMnx pedestrian filtering removed information, like the sidewalks that was necessary to keep. Additionally, OSMnx automatically adds two edges per node pair to indicate that both directions are accessible. This doubles the size of the network, which is why the network is saved as an undirected graph. Where very node pair is connected by a single bi-directional edge, almost halving the storage requirement. 
+
+#table(
+  columns: 3,
+  table.header[*Initial*][*Bottleneck*][*Revised*],
+  [Standard filtered OSMnx],
+  [Loss of tags],
+  [Personal pedestrian filtering],
+  [Multiple ways to tag the same thing],
+  [routing requires flattened representation, but we don't want to lose any information],
+  [Add personal pedestrian tags],
+  [Bi-directionality in standard representation enforced through double edges],
+  [Redundant information increases storage demand],
+  [Change network representation to undirected],
+  [Centre lines],
+  [Pedestrians do not use the center lines of the road],
+  [Solution out of scope: provide analysis for future work],
+)
 === UMEP execution
-- Problem: UMEP's SOLWEIG takes forever to run and the ouputs are gigantic.
-- test two solutions: general & specific
-how:
-- general: test runtimes for collecting data using UMEPIO -> invesitgate feasibility of runnign UMEP on demand when having a GPU speed-up and pedestrian lenght route (not likely longer than 2km)
-- specialization: offload runtime to fast external machine, compute available at university. Deal with the gigantic size by folding information into pedestrian network (context specific possibility).
-- Using SOLWEIG_GPU and ERA5 on an external machine -> DelftBlue
-- what outputs are useful for routing
+The central design requirement was scalability so running SOLWEIG introduced two main challenges:
+- *Space:* UMEP outputs consist of large raster datasets (.tif) containing hourly values that depend on meteorological conditions. Storing these as they are for multiple meteorological situations and locations generates a gigantic storage demand.
+- *Time:* The computational cost of running UMEP simulations is substantial, depending on the hardware it can take about 20-40 minutes to run a 3km by 3km square.
 
+For these problems, two solutions were investigated. The first was a _generalist_ approach, in which UMEP would be run on demand. This would reduce storage requirements, since the collection of input data and running of the model would be done only when a route is requested. However, this shifts the bottleneck to input-data collection. If the full tile surrounding the route of input data still needs to be collected and stored, there is little advantage over storing the model outputs directly. Alternatively, collecting smaller tiles around the route would require many requests to an external data server, such as PDOK. This would greatly increase latency and create a dependency on an external source during route calculation. For a scalable route planner, this is undesirable because it makes the system slower and less reliable. #todo[Too much detail?--> can be a lot shorter.]
+
+The second solution was a _specialist_ approach, in which UMEP outputs are precomputed for the study area and transformed before storage to become a manageable size. The computation time can then be moved to an external machine depending on hardware availability. This approach was chosen for this thesis. SOLWEIG\_GPU was run on the DelftBlue supercomputer which has multiple GPUs shared across the university. The performance (computation time) of SOLWEIG\_GPU was entirely dependent on the RAM available. With tests on the same GPU having either 10GB or 80GB of RAM produces computation times for the test area of 37 minutes or 18 minutes respectively. These large differences indicated that a full performance benchmark would not be additive to this research, since any further work would most likely have access to different hardware anyway. Tile size was not tested but determined using the information provided by the developers of SOLWEIG\_GPU @kamath_solweig-gpu_2026. #todo[should explain more/remove?] 
+
+The output of SOLWEIG\_GPU consists of overlapping tiles, so these were merged back into one file. The tiles were merged back together halfway across the overlap, however there still sometimes are slight differences between the edges in values. So the when the tiles are stuck together the cells around the edges are normalized and averaged to prevent harsh lines. 
+
+Different resolutions were tested and compared using a test set to see how the pedestrian network changes. Since a lower resolution will decrease the computation time. 
+
+#todo(position: "inline")[Which extra days to include for weather(if any)]
+
+#table(
+  columns: 3,
+  table.header[*Initial*][*Bottleneck*][*Revised*],
+  [run umep on demand on small area],
+  [gathering input data too slow],
+  [methodological approach abandoned],
+)
 === Integration within the pedestrian network
 * not really discussed in research*
-- Problem: how can attach weights to the edges that summerize the UMEP outputs to the edges. In technical sense, raster needs to fit into memory for lookup. Context: the rastercells are flattened into one value for a single edge (what's the best way). 
-- Solution: implement it?? Sampling should be described. 
-- sampling technique
-- environmental factors as weights/cost
+This component connects the SOLWEIG outputs to the pedestrian network, which is further referred to as network annotation. Which has both a technical and conceptual side#todo[good wording? try to say; within the context of thermal comfort/ inhoudelijk]. On the technical side this step needs to reduce the storage demands and define the network data structure to make it suitable for routing. Conceptually, this step abstracts away much of the detail which is captured in the full UTCI, TMRT and shadow maps. Since, for routing purposes, only a few values can be considered. Therefore, the attributes were chosen to preserve the aspects of the model outputs most relevant to thermal comfort and route choice.
 
+To do this the raster outputs were sampled along the edges of the pedestrian network. Each edge was assigned summary attributes derived from the raster cells it intersects. In this way, the detailed SOLWEIG outputs were converted into edge-level attributes that could be used directly in the routing algorithm.
+
+The algorithm does for every edge in the graph $G(V, E)$:
+1. Get the geometry of the edge.
+2. Find the indexes of all intersecting raster cells of this edge.
+3. Sample all 24 bands for the intersecting cell.
+4. Flatten these cells into one attribute to attach to the edge.
+  - `utci_category`: took the median of all the UTCI values along an edge and mapped that to the corresponding category. 
+  - `utci_median`#todo[Update when tests are complete]
+#figure(
+  table(
+    columns: 2,
+    table.header[*UTCI (deg C)*][*Thermal stress*],
+    [> 46],
+    [Extreme heat stress],
+    [38 to 46],
+    [Very strong heat stress],
+    [32 to 38],
+    [Strong heat stress],
+    [26 to 32],
+    [Moderate heat stress],
+    [9 to 26],
+    [No thermal stress],
+    [0 to 9],
+    [Slight cold stress],
+    [-13 to 0],
+    [Moderate cold stress],
+    [-27 to -13],
+    [Strong cold stress],
+    [< -40 ],
+    [Extreme cold stress]
+  ), 
+  caption: "UTCI categories as defined for SOLWEIG"
+)<utci-categories>
+
+Where the categories in @utci-categories represent increasingly high penalties to the edge weight. This is in line with findings from Basu et al. (2024), who found that higher UTCI categories have "non-uniform and possibly exponential" effect on perceived walking distance @basu_hot_2024. Using categories of an outdoor thermal comfort index to assign edge weights is consistent with the methodological approach of Ma et al. (2025), who applied PET-based categories for this purpose @ma_active_2025. In this thesis, UTCI was used instead of PET due to the absence of detailed wind information. Nevertheless, the underlying principle remains comparable, as both approaches translate thermal comfort categories into routing penalties.
+
+To do the sampling efficiently the the SOLWEIG output was transformed to a file format suited to spatial access. The merged SOLWEIG output was saved to a .Zarr file, which is a cloud optimized file format that allows efficient access to multidimensional raster data (@sec:annotation). Because Zarr supports chunked access, only the relevant sections of the raster need to be loaded into memory during sampling. Additionally, in this chunk all the bands are present, so only a single query is needed. This is particularly suitable for network annotation, where each edge typically intersects only a small portion of the full raster. Compared with the previous .tif-based workflow, this reduced the annotation time from approximately five minutes to ten seconds. #todo[table?]
+
+The annotated network is then saved to two geoparquet files one with all the edges and one with all the nodes, using a custom data schema. With the schema serving as the translation layer between the network representation used in the annotator and the router as described in @fig:network-schema. 
+#figure(
+  image("../figs/methods/network_schema.png", width: 80%),
+  caption: [
+    Shared network representation
+  ],
+) <fig:network-schema>
+#figure(
+table(
+  columns: 3,
+  table.header[*Initial*][*Bottleneck*][*Revised*],
+  [Sample edge geometry from merged tif],
+  [Multiple lookups for every band negatively impact performance],
+  [Merge tif tiles in a .Zarr format],
+  [Flatten environmental values to one attribute],
+  [Large information loss, reduces explainability],
+  [Add extra attributes that can help analyse the final routes],
+  [Use OSMnx networkX representation],
+  [Introduces performance issues during routing],
+  [Shared data schema and storage in geoparquet, storing nodes, edges and metadata],
+  ),
+  caption: "Emergent process network annotation"
+)<table-annotation>
 
 === Routing Prototype
-problem: algorithm should be dynamic -> as a pedestrian walks the length of being in heat is increasingly bothersome.  Algorithm should not just have researcher defined weights, since the situation can change for different user preferences. 
+problem: algorithm should be dynamic -> as a pedestrian walks the length of being in heat is increasingly bothersome.  Algorithm should not just have researcher defined weights, since the situation can change for different user preferences. -> user defined.
 - Using weighted dijkstra?
 - User defined 'importance' metrics -> 'do you wanna walk in the sun?'
 - combining all components
-Application: not really problem, more of a tool for communitcation & testing.
+==== Edge cost
+- Environmental cost as a penalty to the length of the edge.
+  - If only environmental cost is considered edge length a very hot edge of 5m will have a bigger cost than a slightly hot edge of 500m. So length should always factor in. Leadign to: 
+  $C_e​=L_e​⋅(1+P_e​)$
+
+  With:
+  $C_e$: the cost of the edge \
+  $L_e$: the length of the edge in meters \
+  $P_e$: the normalized environmental penalty mulitplier \
+Where $P_e$ is built using the user preferences, the environmental variable and the state of the pedestrian. Which is quantified in the following formula:
+
+$P_e = sum_(i=1)^n w_i * gamma_i (s) * p_i$
+
+with:\
+$w$: being the user defined importance of a variable \
+$gamma$: being the dynamic sensitivity function that depends on route-state $s$.\
+$p$: the normalized envioronmental penalty on edge $e$\
+
+The environmental penalty scales with the severity of the heat stress. With moderate heat stress contributing about 80m 
+
+
+Application: not really problem, more of a tool for communication & testing.
 - Prototype using Shiny
 - Why API between routing and GUI
 
-== Validation and evaluation of the routeplanner (analyzing the data)
+
+#figure(
+table(
+  columns: 3,
+  table.header[*Initial*][*Bottleneck*][*Revised*],
+  [NetworkX representation],
+  [Performance issues at scale],
+  [Custom network representation],
+  [Application also does routing],
+  [Coupling of elements can negatively effect reusability and client-side calculation of routes introduces performance constraints],
+  [Separate routing from the application and communicate between the two via an API]
+),
+  caption: "Emergent process routing network"
+)<table-routing>
+
+== Validation and evaluation of the route planner (analysing the data)
 <validation>
+=== Evaluation
 Runeson et al. note that insights from design-based research are inherently context based @runeson_design_2020. 
-- functional validation: are outputs consitent, does it make sense in a pedestrian context. (this balance between level of detail etc) (evaluate routes/inputs)
+- functional validation: are outputs consistent, does it make sense in a pedestrian context. (this balance between level of detail etc) (evaluate routes/inputs)
 - intended purpose evaluation: are the routes significantly different, does it scale, is it easy to use and extend. (evaluate as a tool)
 - reflection on implementation choices: How do i come to recommendations
+
+=== Validation
+The design of the algorithm is informed by structural evaluation. The empirical validation was done by creating a stratified origin destination test set. In this test set there are meaningful categories of OD pairs that are expected to generate certain statistics when routes are generated between them. For example, the top area of the test area is very hot around mid day, so we expect longer routes that have to cross it to be longer on average than the same pairs during the night. This test set can then be compared to results gathered by previous work and the parameters of the algorithm and the weights in the pedestrian network can be tuned. 
+
+These categories were derived manually based on the distribution of heat in the input dataset.
 
 == Limitations of this study design
 - No dataset to compare my routes to, no questionares to people that use them. 

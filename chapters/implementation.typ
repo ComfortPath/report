@@ -47,7 +47,7 @@ OSMnx graph representation necessitates two edges to indicate bidirectionality. 
 - merging tif to Zarr. -> how it's merged
 
 == Annotating the network
-
+<sec:annotation>
 - Sampling on a Zarr file. why it's faster
 - point-based sampling (or maybe somthing else?)
 - which variables to attatch to the edges
@@ -59,9 +59,25 @@ OSMnx graph representation necessitates two edges to indicate bidirectionality. 
 SOLWEIG_GPU returns tiles in speperate folders with the given tile size and overlap, which are then merged. Shared overlap area is split evenly between adjacent tiles. After which the tile is written to it's georeferened location in the Zarr file, by splitting the overlap the tiles align exactly. Zarr is a cloud optimized format for 
 
 == Routing prototype
+NetworkSchema
+    ↓
+original node IDs mapped to dense integer node indices
+    ↓
+edges converted to NumPy arrays
+    ↓
+adjacency list describes connectivity
+    ↓
+Dijkstra uses edge weights to find a route
+    ↓
+result maps back to original node IDs and edge table rows
+
+Utilizes 
 === data schema
 To perform routing in a way that is scalable, we must lose the networkX representation
 - distance always part of the equation?
+
+=== Application
+The internal datastructure lists of nodes and edges need to be transformed to a shape that the UI understands.
 
 
 #table(
@@ -90,6 +106,12 @@ To perform routing in a way that is scalable, we must lose the networkX represen
   [Use OSMNX],
   [Implementation is dependent OSMNX graph representation which couples the routing and network allocation by file format],
   [Use a shared data schema between the two elements of the route planner],
-  [Dependency on (complex) software packages can introduce unecessary limitations to the system]
+  [Dependency on (complex) software packages can introduce unecessary limitations to the system],
+
+  [Network annotation],
+  [Flatten environmental value as one attribute into network, map the median UTCI to categories],
+  [A lot of information is lost, two road segments can have the same median but with a very different actual feel],
+  [Add attributes to the network that can provide context, increases the explainability of the final results],
+  [Taking extensibility as a core design requirement has the added benefit that it can increase the explainability of the software. The original pupose was for other workflows or priorities to be possible, but this came up as important as well],
 
 )

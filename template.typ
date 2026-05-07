@@ -13,6 +13,8 @@
 //-- for the to-be-done things
 #import "@preview/dashy-todo:0.1.2": todo
 
+#import "@preview/algo:0.3.6": algo, i, d, comment, code
+
 
 
 
