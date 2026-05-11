@@ -154,6 +154,7 @@ let mono-font = (
     graduation-month: graduation-month,
     supervisor1: supervisor1,
     supervisor2: supervisor2,
+    supervisor3: supervisor3,
     coreader   : coreader,
     graduation-group: graduation-group,
     serif-fonts: serif-fonts,

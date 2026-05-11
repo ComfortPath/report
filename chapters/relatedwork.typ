@@ -42,8 +42,10 @@ In existing literature, pedestrian networks are typically generated using OpenSt
 
 The first, and most simple to implement, approach is to assign a single score to stretches in the network based on a set of factors @mora-navarro_optimising_2018 @novack_system_2018 @foshag_how_2024. This gives a formula for the weight of an edge $W$ with $f_i$ being the factors you wish to consider (e.g., length, shade, greenery) and $w_i$ being the weights assigned to each of these factors.
 
+#set align(center)
 $ W = sum_{i=1}^{n} w_i f_i$
 
+#set align(left)
 Several studies extend this approach to better represent heat-related discomfort. By adjusting the edge weights as the route is being generated to favor shadier routes, taking into account the increasing desire for shade as pedestrians spend a longer time in the heat @wen_walking_smart_2025 @rusig_reducing_2017. Wen et al. (2025) adjusted the generated route using a sigmoid function, deduced from a pedestrian movement dataset, to find an optimal balance between actual distance and sun exposure @wen_walking_smart_2025. While Rußig & Bruns (2017) use a time-dependent multi-layered raster as the input to account for this effect. Aliyev & Nanni (2025-06) applied a different technique to find an optimum between distance and exposure, though they wanted to avoid pollution. They generated a set of routes with different weights, to use a statistical method to find the optimum between distance and exposure for every trip @aliyev1_exploiting_2025. This was later extended to dynamically adjust the weights as pollution moves trough the city. @aliyev2_vehicle-pedestrian_2025 Although demonstrated for pollution avoidance, this approach allows weights to be adjusted automatically and to vary between individual trips. These approaches in routing algorithm are summarized in @table:lit-algorithms. Descriptions
 - *Static* the previously visited edges do not have an impact on the rest of the route.
 - *Dynamic* the previously visited edges can change on the weight of the next edge.

@@ -47,7 +47,7 @@ OSMnx graph representation necessitates two edges to indicate bidirectionality. 
 - merging tif to Zarr. -> how it's merged
 
 == Annotating the network
-<sec:annotation>
+<imp:annotation>
 - Sampling on a Zarr file. why it's faster
 - point-based sampling (or maybe somthing else?)
 - which variables to attatch to the edges
@@ -78,9 +78,13 @@ To perform routing in a way that is scalable, we must lose the networkX represen
 
 === Application
 The internal datastructure lists of nodes and edges need to be transformed to a shape that the UI understands.
+#set page(
+  paper: "a4",
+  flipped: true,
+)
 
-
-#table(
+#figure(
+table(
   columns: 5,
   table.header[*Component*][*Initial approach*][*Bottleneck*][*Revised approach*][*Broader lesson*],
     
@@ -114,4 +118,10 @@ The internal datastructure lists of nodes and edges need to be transformed to a 
   [Add attributes to the network that can provide context, increases the explainability of the final results],
   [Taking extensibility as a core design requirement has the added benefit that it can increase the explainability of the software. The original pupose was for other workflows or priorities to be possible, but this came up as important as well],
 
+),
+caption: "Design steps of the emergent design p"
+)<tab:emergent>
+#set page(
+  paper: "a4",
+  flipped: false,
 )

@@ -11,7 +11,9 @@ This chapter details the measurements done associated with different design deci
 === data preperation
 - Ease of use as an important componenet in how useful 
 - Running SOLWEIG on demand bottlenecked by input data download latency and method (merge for CHM)
-  - 
+
+- Unnoticed loss of detail by using automatic filtering in the OSM collection. Nothing wrong with losing information but abstracting these steps means that the final user might lose information without knowing why. -> which software you choose can thus have an unnoticed effect on the final result. 
+
 === running SOLWEIG
 - Running SOLWEIG on (fast) external machine, indipendent process, so very well suited. especially in a research context there is usually university wide compute available.
 

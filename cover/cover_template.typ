@@ -7,6 +7,7 @@
   graduation-month: "November",
   supervisor1: "",
   supervisor2: "",
+  supervisor3:"",
   coreader   : "",
   graduation-group: "",
   serif-fonts: "",
@@ -62,7 +63,7 @@
       align: (top, top),
       gutter: 15pt,
       [Supervisors:], 
-      [#supervisor1 #linebreak() #supervisor2],
+      [#supervisor1 #linebreak() #supervisor2 #linebreak() #supervisor3],
       [Co-reader:],
       [#coreader],
     )
