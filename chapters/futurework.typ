@@ -1,1 +1,1 @@
-UTCI was used but this is not person specific, a value like PET would be more appropriate. However this needs wind information that is not generated in this thesis.The algorithm could be extended to calculate weights based on PET score by using the TMRT edge values if wind is also available. (I can do a basic implemetation)
+= Future work

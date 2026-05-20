@@ -94,6 +94,8 @@
 #include "chapters/implementation.typ"
 #include "chapters/results.typ"
 #include "chapters/discussion.typ"
+#include "chapters/conclusion.typ"
+
 //-- back-matter
 // must take page breaks into account, may need to be offset by +1 or -1
 // #context counter(page).update(counter(page).at(<front-matter>).first())
@@ -103,9 +105,10 @@
 #let figure-numbering = super => numbering("A.1", counter(heading).get().first(), super)
 #show figure.where(kind: image): set figure(numbering: figure-numbering)
 
+#include "appendices/appendixA.typ"
 #include "appendices/useofai.typ"
 #include "appendices/reproducibility.typ"
 #include "appendices/someumldia.typ"
 
 //-- references
-#bibliography("./refs/refs.bib", style: "./refs/ieee.csl")
+#bibliography("./refs/refs.bib", style: "./refs/ieee-alphabetical.csl")

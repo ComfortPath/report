@@ -78,7 +78,7 @@ To ensure the insights gathered in this thesis are as broadly applicable as poss
 
 // Each component is framed as a problem–solution pair, where the problem statements are derived from approaches in existing literature and evaluating them against the desired software property of scalability. The proposed solutions are informed both by existing literature and by insights gained in earlier development stages.#todo[At the end: is this what I've actually done?] 
 
-The description in the methodology represents the state after the multiple design iterations. Where applicable the emergent design process is represented by tables showing initial approach, the bottleneck it introduced, and how the approach was revised. More information on the emergent process can be found in @tab:emergent#todo[make more detailed tables and move to appendix]. For some elements the initial direction and approach gathered from literature proved sufficient and no revision was necessary to come to the final product.
+The description in the methodology represents the state after the multiple design iterations. Where applicable the emergent design process is represented by tables showing initial approach, the bottleneck it introduced, and how the approach was revised. More information on the emergent process can be found in @appendix-A#todo[make more detailed tables and move to appendix]. For some elements the initial direction and approach gathered from literature proved sufficient and no revision was necessary to come to the final product.
 
 === The pedestrian routing tool
 The final tool is a pedestrian route planner that uses urban microclimate model outputs to generate thermally comfortable walking routes. Instead of calculating only the shortest route, the tool allows modelled thermal conditions to influence the cost of walking along a certain road. This combines into a Dijkstra routing algorithm that chooses a least-cost route that balances thermal comfort and distance. #todo[p. provides context, but maybe double info]
@@ -100,11 +100,12 @@ Performance is treated both as part of scalability and as a requirement in itsel
 
 Additionally, faster components make iterative development, testing, and debugging more efficient, while also improving the scalability of the complete workflow. However, performance optimization is not treated as an objective in itself. Optimization decisions are weighed against their expected impact on the use case, in order to avoid over-engineering individual components where the practical benefit would be limited.
 
-Reusability is the third requirement and is addressed through a component-based design @khalid_software_2025 @mehboob_reusability_2021. The tool is divided into separate modules with low coupling #footnote[Coupling is a term used in software design that describes how dependent software modules are on each other. High coupling means that changes in one module of the software can have big effects on other modules. Low coupling means that the modules are largely independent from each other.] and high cohesion #footnote[Cohesion is closely related to coupling and refers to how well all the elements in a module are supporting a single well defined purpose. For reusability low coupling and high cohesion is preferred.]. Each component should have a clearly defined purpose and communicate with other components through explicit data formats if necessary. This makes the system easier to test, replace, or extend without changing the entire pipeline. Reusability also supports scalability, because future applications are unlikely to require the full methodology exactly as developed in this thesis. Depending on the available data, computational resources, and research aim, only specific components may be relevant. A modular design allows these individual parts to remain useful even when the complete route planner is not implemented.
+Reusability is the third requirement and is addressed through a component-based architecture @khalid_software_2025 @mehboob_reusability_2021. #todo[explain why component based design supports reusability] The tool is divided into separate modules with low coupling #footnote[Coupling is a term used in software design that describes how dependent software modules are on each other. High coupling means that changes in one module of the software can have big effects on other modules. Low coupling means that the modules are largely independent from each other.] and high cohesion #footnote[Cohesion is closely related to coupling and refers to how well all the elements in a module are supporting a single well defined purpose. For reusability low coupling and high cohesion is preferred.]. Each component should have a clearly defined purpose and communicate with other components through explicit data formats if necessary. This makes the system easier to test, replace, or extend without changing the entire pipeline. Reusability also supports scalability, because future applications are unlikely to require the full methodology exactly as developed in this thesis. Depending on the available data, computational resources, and research aim, only specific components may be relevant. A modular design allows these individual parts to remain useful even when the complete route planner is not implemented.
 #figure(
 table(
-  columns: 3,
-  table.header[*Initial approach*][*Bottleneck*][*Revised*],
+  columns: 4,
+  table.header[*Insight*][*Initial approach*][*Bottleneck*][*Revised*],
+  [I9],
   [Ease of use, performance, scalability],
   [strong coupling between components introduces performance bottlenecks],
   [modular system design with high cohesion that supports reusability],
@@ -129,17 +130,25 @@ The final workflow therefore uses plain OpenStreetMap data, gathered through OSM
 A custom filtering was applied to gather the pedestrian network from the OSM since the OSMnx @osmnx_geoff_2025 pedestrian filtering removed information, like the sidewalks that was necessary to keep. Additionally, OSMnx automatically adds two edges per node pair to indicate that both directions are accessible. This doubles the size of the network, which is undesired in this use case due to the annotation of the edges looping over every edge (see @mth:annotation). So the network is saved as an undirected graph. Where very node pair is connected by a single bi-directional edge, almost halving the storage requirement. 
 #figure(
 table(
-  columns: 3,
-  table.header[*Initial*][*Bottleneck*][*Revised*],
+  columns: 4,
+  table.header[*Insight*][*Initial*][*Bottleneck*][*Revised*],
+  [I1],
+  [Use the SOLFD pipeline directly from its original code distribution],
+  [The pipeline was difficult to install and run because of how the code was distributed],
+  [Distribute the SOLFD pipeline as a PyPI package],
+  [I3],
   [Standard filtered OSMnx],
   [Loss of tags],
   [Personal pedestrian filtering],
+  [I3],
   [Multiple ways to tag the same thing],
   [routing requires flattened representation, but we don't want to lose any information],
   [Add personal pedestrian tags],
+  [I4],
   [Bi-directionality in standard representation enforced through double edges],
   [Redundant information increases storage demand],
   [Change network representation to undirected],
+  [I2],
   [Centre lines],
   [Pedestrians do not use the center lines of the road],
   [Solution out of scope: provide analysis for future work],
@@ -162,11 +171,16 @@ Different resolutions were tested and compared using a test set to see how the p
 #todo(position: "inline")[Which extra days to include for weather(if any)]
 #figure(
 table(
-  columns: 3,
-  table.header[*Initial*][*Bottleneck*][*Revised*],
-  [run umep on demand on small area],
-  [gathering input data too slow],
+  columns: 4,
+  table.header[*Insight*][*Initial*][*Bottleneck*][*Revised*],
+  [I5],
+  [Run umep on demand on small area],
+  [Gathering input data too slow],
   [methodological approach abandoned],
+  [I6],
+  [Use external compute infrastructure],
+  [Performance depended strongly on available hardware],
+  [Do tests on the available hardware before defining the workflow],
 ),
 caption: "Emergent process UMEP execution"
 )
@@ -211,9 +225,9 @@ The algorithm does for every edge in the graph $G(V, E)$:
 
 Where the categories in @utci-categories represent increasingly high penalties to the edge weight. This is in line with findings from Basu et al. (2024), who found that higher UTCI categories have "non-uniform and possibly exponential" effect on perceived walking distance @basu_hot_2024. Using categories of an outdoor thermal comfort index to assign edge weights is consistent with the methodological approach of Ma et al. (2025), who applied PET-based categories for this purpose @ma_active_2025. In this thesis, UTCI was used instead of PET due to the absence of detailed wind information. Nevertheless, the underlying principle remains comparable, as both approaches translate thermal comfort categories into routing penalties.
 
-To do the sampling efficiently the the SOLWEIG output was transformed to a file format suited to spatial access. The merged SOLWEIG output was saved to a .Zarr file, which is a cloud optimized file format that allows efficient access to multidimensional raster data (See @imp:annotation). Because Zarr supports chunked access, only the relevant sections of the raster need to be loaded into memory during sampling. Additionally, in this chunk all the bands are present, so only a single query is needed. This is particularly suitable for network annotation, where each edge typically intersects only a small portion of the full raster. #todo[move Zarr expl to implementation] Compared with the previous .tif-based workflow, this reduced the annotation time from approximately five minutes to ten seconds. #todo[table?]
+To do the sampling efficiently the the SOLWEIG output was transformed to a file format suited to spatial access. The merged SOLWEIG output was saved to a .Zarr file, which is a cloud optimized file format that allows efficient access to multidimensional raster data (See @fig:zarr) #todo[reference to zarr section]. Because Zarr supports chunked access, only the relevant sections of the raster need to be loaded into memory during sampling. Additionally, in this chunk all the bands are present, so only a single query is needed. This is particularly suitable for network annotation, where each edge typically intersects only a small portion of the full raster. #todo[move Zarr expl to implementation] Compared with the previous .tif-based workflow, this reduced the annotation time from approximately five minutes to ten seconds. #todo[table?]
 
-The annotated network is then saved to two geoparquet files one with all the edges and one with all the nodes, using a custom data schema. With the schema serving as the translation layer between the network representation used in the annotator and the router as described in @fig:network-schema. 
+The annotated network is then saved to two GeoParquet files one with all the edges and one with all the nodes, using a custom data schema. With the schema serving as the translation layer between the network representation used in the annotator and the router as described in @fig:network-schema. OSMnx could only be saved as a graphGML, which can be difficult to parse and takes uup a lot of space. The network saved as a graphGML took up 26MB of space while GeoParquet only takes up 1MB of space.#todo[fit this i n more logically] 
 #figure(
   image("../figs/methods/network_schema.png", width: 80%),
   caption: [
@@ -222,14 +236,13 @@ The annotated network is then saved to two geoparquet files one with all the edg
 ) <fig:network-schema>
 #figure(
 table(
-  columns: 3,
-  table.header[*Initial*][*Bottleneck*][*Revised*],
+  columns: 4,
+  table.header[*Insight*][*Initial*][*Bottleneck*][*Revised*],
+  [I7],
   [Sample edge geometry from merged tif],
   [Multiple lookups for every band negatively impact performance],
   [Merge tif tiles in a .Zarr format],
-  [Flatten environmental values to one attribute],
-  [Large information loss, reduces explainability],
-  [Add extra attributes that can help analyse the final routes],
+  [I8],
   [Use OSMnx networkX representation],
   [Introduces performance issues during routing],
   [Shared data schema and storage in geoparquet, storing nodes, edges and metadata],
@@ -261,11 +274,11 @@ where $C_e$ is the edge cost, $L_e$ is the edge length in meters and $P_e$ is th
 
 The environmental penalty is defined as:
 #set align(center)
-  $P_e = sum_(i=1)^n w_i * gamma_i (s) * p_i$
+  $P_e = sum_(i=1)^n w_i  * p_i * gamma_i (s)$
 #set align(left)
 where $w_i$ represents the user-defined importance of environmental variable $i$, 
-$gamma_i(s)$ is a dynamic sensitivity function dependent on the route-state $s$, 
-and $p_i$ is the normalized environmental penalty associated with edge $e$.
+$p_i$ is the normalized environmental penalty associated with edge $e$ and variable $i$,
+and $gamma_i(s)$ is a dynamic sensitivity function dependent on the route-state $s$. 
 
 The environmental penalty scales with the severity of the heat stress @basu_hot_2024. These multipliers effectively increase the distance of hot edges, which makes the algorithm more likely to choose a slightly longer route that is more comfortable. 
 
@@ -292,11 +305,13 @@ The interface uses a MapLibre GL map #footnote[https://maplibre.org/projects/gl-
 
 #figure(
 table(
-  columns: 3,
-  table.header[*Initial*][*Bottleneck*][*Revised*],
+  columns: 4,
+  table.header[*Insight*][*Initial*][*Bottleneck*][*Revised*],
+  [I8],
   [NetworkX representation],
   [Performance issues at scale],
   [Custom network representation],
+  [I9],
   [Application also does routing],
   [Coupling of elements can negatively effect reusability and client-side calculation of routes introduces performance constraints],
   [Separate routing from the application and communicate between the two via an API]
@@ -306,7 +321,7 @@ table(
 
 == Validation and evaluation of the route planner 
 <validation>
-In this thesis there is a distinction between validation and evaluation. Validation refers to testing the more standard functionality of the route planner. While evaluation encompasses the reflexive method used to generate the generalizable insights from the design iterations. The evaluation method was described in @research-approach and an overview with the insights can be found in @tab:emergent. #todo[table is in next chapter. will probably be appendix in the end (and is still incomplete).]
+In this thesis there is a distinction between validation and evaluation. Validation refers to testing the more standard functionality of the route planner. While evaluation encompasses the reflexive method used to generate the generalizable insights from the design iterations. The evaluation method was described in @research-approach and an overview with the insights can be found in @appendix-A. #todo[table is in next chapter. will probably be appendix in the end (and is still incomplete).]
 
 The final pedestrian routing tool was validated on it's functionality. Does the tool actually generate routes that are more comfortable than the shortest path. First, two routes with a large difference between the shortest and most comfortable path were manually evaluated. This evaluation is done using the original SOLWEIG output maps to validate that the flattening is not causing any meaningful data loss or changes. This method is less structured, but aligns with how validation was happening naturally during the development process. 
 
