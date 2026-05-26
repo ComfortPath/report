@@ -102,7 +102,7 @@ let mono-font = (
   show heading: set text(font: sans-fonts)
   show heading.where(level: 1): it => counter(figure.where(kind: image)).update(0) + it
   show heading.where(level:1): it => text(font: sans-fonts, 1.5em, it) + v(2em)
-  show heading.where(level: 1): it => pagebreak(weak: true, to: "odd") + it
+  show heading.where(level: 1): it => pagebreak(weak: true) + it
   show figure.where(kind: image): set figure(numbering: figure-numbering)
 
   //-- math

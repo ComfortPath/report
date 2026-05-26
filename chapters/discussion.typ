@@ -1,32 +1,51 @@
 #import "../template.typ": *
-/*
-- *RQ:* 
-  - *RQ1:* 
-  - *RQ2:* H
-  - *RQ3:* What does scalability mean for a pedestrian routing tool particularly regarding its potential for spatial and functional extension?
-  - *RQ4:* 
-  */
+
 = Discussion and conclusion
-#todo(position: "inline")[make sure RQ's match with introduction]
-This chapter will first discuss the results, with the 
-== Discussion of results
-In this section the results of the thesis are discussed and evaluated. 
-- Any insights into scalability and performance cannot be removed from implementation. Since the way things are implemented, decides what the performance will be. 
+<chap:discussion-conclusion>
+This chapter will first quickly summarise the main points in the results chapter. Then the specific contributions, limitations and recommendations for future work are given. Finally it concludes by answering the research questions posed at the beginning of this thesis.
 
-- THis thesis aimed to provide insights into how technical vooruitgang can open up opportunities -- like solweig-gpu, and cloud optimized formats. 
+== Contributions
+- A fully open-source methodology for generating thermally conscious pedestrian routes, implemented in a locally deployable web-based tool for route interaction and visualisation.
 
-- Not just a scalable route-planner but also an more general insight into the possibilities of solving performance issues with smart data structures and technologies. Not necessitating entire methodological shifts. 
+- Insights into how implementation-level design choices affect the performance, scalability, and interpretability of urban microclimate-informed pedestrian routing tools.
 
-- Robustness and abstraction. Usually UMC modelling results are viewed and analysed by experts on the subject matter. It's an end product that can be used for analysis. In this application it's the base on which further abstractions are performed. This makes the process vulnerable to mistakes. Since the analysis is only done while the tool is being developed it becomes more difficult to abstract things away.
+== Limitations
+*Climatic and geographic transferability: * The results are based on a Rotterdam case-study area under one high-heat weather scenario. The weighting scheme and routing outcomes may therefore not transfer directly to cities with warmer, drier, or more extreme climates, or to other seasonal and meteorological conditions. Thus, the transferability of the proposed approach to other climatic contexts should be evaluated carefully before broader application.
 
-- Sometimes the algorithm introduces a route that has a higher utci_median than the shortest route. This is because the algorithm harshly punishes very hot edges. However, in these cases it can happen that the adjusted route will avoid this extremely hot edge, but crossing a more medium hot edges, causing the average 
-- Results in absolute terms are not as good as in other research in terms of reduced heat stress. In part can be attributed to the climate in the Netherlands. Since most other research was done in hot climates. Additionally, @rusig_reducing_2017 achieved a higher lowering of temperature but their routes were on average 2km long, thus it is to be expected that 
+*Thermal-comfort indicator: * The routing tool uses UTCI as a generalized indicator of thermal stress. UTCI is based on a predefined reference person and does not account for individual differences such as age or sex. As a result, the route planner cannot directly represent the thermal vulnerability of specific pedestrian groups. The main form of user customisation is limited to adjusting the user-defined weights.
 
-== Research questions
+*Thermal-comfort validation: * The validation shows that the tool can reduce modelled UTCI exposure compared with the shortest route, but it does not validate whether pedestrians would actually experience these routes as being more comfortable. No field measurements, human-subject testing, or perception-based validation were conducted. 
+
+*SOLWEIG\_GPU: * The SOLWEIG\_GPU implementation used in this thesis could not process negative height values, such as elevation values below sea level. Therefore, negative values in the DTM and DSM were set to zero before simulation. This preprocessing step may have introduced inaccuracies in the representation of the urban surface. Consequently, local variations in terrain and building height may not have been fully preserved in the thermal-comfort simulations.
+
+*Performance and scalability evaluation: * The runtime results should be interpreted as indicative rather than as a general benchmark. They were measured on specific hardware and for a limited number of spatial cases. The thesis therefore demonstrates a scalable software structure, but not full large-scale operational scalability. 
+
+*Pedestrian network representation: * The pedestrian network used in this thesis is based on OpenStreetMap data and therefore inherits both the advantages and limitations of a crowd-sourced dataset. Tagging practices may vary between contributors, meaning that similar pedestrian features can be represented inconsistently or remain unmapped. In addition, many road segments are represented as centre lines, while pedestrians for example often move along sidewalks. This may have introduced inaccuracies when sampling the UTCI raster, because the network geometry does not always correspond with the actual locations of pedestrian movement. The generated routes should therefore be interpreted as thermally conscious routes within the available digital network representation, rather than as exact representations of pedestrian-level exposure in the real world.
+
+*Automated abstraction of microclimate outputs: * Urban microclimate modelling outputs are typically inspected and interpreted by domain experts as an end product for analysis, whereas in this thesis they form the basis for additional automated abstractions. This makes the workflow more vulnerable to modelling errors, preprocessing issues, or local anomalies that may remain unnoticed once the data are converted into routing weights. The risk is especially relevant for applications at scale, where results may be generated for larger areas or different contexts without detailed expert inspection of each intermediate output.
+
+
+== Future work
+*Scalability: * The workflow can be applied to larger and more diverse study areas in order to evaluate its practical scalability. In this thesis, scalability was investigated mainly at the level of software structure, data formats, and component design. A next step would be to test whether the same workflow can be applied across different neighbourhoods, cities, climatic contexts, and weather scenarios without requiring substantial methodological redesign. This would make it possible to evaluate both the spatial transferability of the tool and the sensitivity of the routing outcomes to different thermal conditions.
+
+*Thermal comfort validation:* The generated routes should be validated against actual pedestrian experience. This could be addressed for example through field measurements or feedback collected through the web-based interface. Such validation would be especially important for refining the weighting scheme, since the current routing costs are only based on modelled exposure rather than observed user preferences.
+
+
+*Person-specific and multi-variable routing: * The current implementation uses UTCI as a generalized thermal-stress indicator and allows users to adjust the importance of thermal comfort through weighting. However, it does not directly model differences between pedestrian groups or individual vulnerability. Future work could investigate the use of alternative thermal-comfort indicators, such as PET, if the required meteorological inputs are available. In addition, the routing framework could be extended with other environmental or experiential variables, such as greenery, shade, air quality, noise, or visual comfort. This would also allow further investigation of automatic or data-driven weighting schemes, rather than relying only on predefined or user-defined weights.
+
+*Performance: * The most substantial performance bottlenecks occurred during data preparation and SOLWEIG execution. Future work could therefore explore cloud-native geospatial data access, which may reduce the need to merge complete source tiles when generating the input data before running the model. Alternative approaches to generating thermal-comfort maps, including machine-learning-based approximations @ma_street_2025, could also be investigated, particularly if they reduce computation time while preserving sufficient spatial accuracy for routing applications. Once the effect of spatial resolution on routing accuracy has been validated, lower-resolution simulations could also be explored as a performance optimisation strategy.
+
+*Pedestrian network: * Future research could compare centre-line-based networks with sidewalk-aware networks, manually corrected pedestrian geometries, or datasets that include indoor and semi-indoor pedestrian paths. This would make it possible to quantify how network representation affects sampled UTCI values, route selection, and the estimated thermal benefit of the generated routes.
+
+== Research overview
 === Main RQ
-#quote[*RQ: * _How can urban microclimate data generated by UMEP's SOLWEIG be transformed and integrated into a fully open-source, scalable pedestrian routing tool to support thermally comfortable mobility decisions at the individual level?_]
+#quote[*RQ: * _How can urban microclimate data generated by UMEP's SOLWEIG be transformed and integrated into a fully open-source, scalable pedestrian routing tool to support thermally conscious mobility decisions at the individual level?_]
 
-The entire pipeline to go from input data to routeplanner consists of multiple separate components. All of which have different tasks and bottlenecks. The right datastructure is thus dependent on the component and hsould be custom. To support this need for different datastructures depending on the componenet a the code needs to be designed in a modular way. With high coshesion wihtin teh component, code that shares a conceptual function stays together. And low coupling, a change in one component does not affect the other componenets -> itroduce no limitations becasue of design descisions in a different componenet. 
+The pipeline from input data to route planner consists of several separate components, each with its own function, data requirements, and performance bottlenecks. As a result, there is no single data structure that is optimal for the entire workflow. Instead, the representation of the data should be adapted to the task of each component. This requires a modular software design in which related functionality is grouped within cohesive components, while dependencies between components remain limited. The open-source design is central to this workflow, because it allows the transformation from SOLWEIG-based microclimate modelling to route generation to remain reproducible, inspectable, and adaptable beyond the case-study implementation.
+
+This modular design is reflected in the way spatial information changes form throughout the workflow. SOLWEIG outputs represent thermal conditions as gridded raster surfaces, which are appropriate for microclimate modelling but not directly usable by a graph-based routing algorithm. During network annotation, these raster values are sampled and aggregated into edge-level attributes. These attributes then become part of the routing cost, allowing thermal conditions to be incorporated into path calculation without requiring the routing algorithm to access the full raster output directly.
+
+In this way, the tool supports thermally conscious mobility decisions by translating urban microclimate information into a route alternative for an individual trip. Rather than only providing a map of thermal conditions, the workflow makes this information actionable by using modelled heat exposure directly in route generation. The resulting route reflects a trade-off between distance and thermal comfort based on the selected routing settings, allowing the user to choose a route that is informed by local thermal conditions.
 
 === Operationalizing UMEP outputs
 #quote[*RQ1: * _What design strategies and data structures enable the effective use of UMEP outputs in a scalable pedestrian route planning application?_] 
@@ -35,61 +54,32 @@ The first design strategy is to make the preparation of input data as automatic 
 
 A second important strategy is to transform the SOLWEIG outputs into a data structure that matches the needs of the routing application. Instead of using the full raster outputs directly during route calculation, the environmental information is sampled in advance and attached to the pedestrian network. In this way, the pedestrian network becomes the main data structure for routing as well as for storing relevant environmental attributes. This structure is also functionally extendable, because additional variables can be appended to the network edges and described in the metadata without changing the overall system design.
 
-Lastly, to support this transformation, a fitting choice for the file format is important. In this thesis, the SOLWEIG outputs were merged into a Zarr file, which supports efficient handling of large spatio-temporal raster data. These files can then be sampled and reduced to edge-based attributes efficiently.
+Lastly, to support this transformation, appropriate file formats for the use-case should be chosen. In this thesis, the SOLWEIG outputs were merged into a Zarr file, which supports efficient handling of large spatio-temporal raster data. These files can then be sampled and reduced to edge-based attributes efficiently.
 
 === Routing algorithm
 #quote[*RQ2: * _How can established weighted-cost routing algorithms incorporate SOLWEIG outputs and be implemented and adapted to automatically generate thermally conscious pedestrian routes?_]
 
-The thermal attributes derived from SOLWEIG, in this case median UTCI, are attached directly to the pedestrian network and used by the cost function of the routing algorithm. Edges with less favourable thermal conditions receive a higher cost, allowing the algorithm to generate thermally conscious routes. The algorithm design is informed by established weighted-cost routing approaches used in research on environmentally conscious routing, where route choice is influenced not only by distance but also by additional environmental cost components.
+The thermal attributes derived from SOLWEIG are attached directly to the pedestrian network and used by the cost function of the routing algorithm. Edges with less favourable thermal conditions receive a higher cost, allowing the algorithm to generate thermally conscious routes. For the algorithm to be applicable in a thermally conscious routing context, it needed to incorporate both dynamic thermal exposure and adjustable user preferences.
 
-First, the algorithm needed to be dynamic, because the cost of the next edge can depend not only on its environmental attributes, but also on the current state of the route and the edges that have already been taken. Therefore, the shortest path algorithm needs to be state-aware. Second, the routing should not depend only on researcher-defined weights. By allowing users to adjust the importance of environmental attributes, the tool can better account for different preferences and changing circumstances. This also supports functional scalability, because new environmental attributes can be added to the network and incorporated into the weighting structure without changing the overall routing approach.
+First, the algorithm needed to be dynamic, because the cost of the next edge can depend not only on its environmental attributes, but also on the current state of the route and the edges that have already been taken. Therefore, the shortest path algorithm needs to be state-aware. Second, the routing should not depend only on researcher-defined weights. By allowing users to adjust the importance of environmental attributes, the tool can better account for different preferences and changing circumstances. 
 
-=== Data completeness and abstraction
-#quote[*RQ3: * _How do assumptions in data quality (completeness) in the digital representation of the pedestrian network influence the applicability of the resulting tool?_]
-
-- say something about the importance of abstraction/data loss, maybe not entirely suited to being a research question and more a well informed thing for future work.
 === Scalability 
 #quote[*RQ3: * _What does scalability mean for a pedestrian routing tool particularly regarding its potential for spatial and functional extension?_]
+In the context of this thesis, scalability refers to the ability of the pedestrian routing tool to be extended beyond its initial case-study implementation without requiring fundamental redesign. This includes spatial scalability, meaning application to larger or different geographic areas, and functional scalability, meaning the ability to incorporate additional routing criteria as the definition of thermally comfortable pedestrian routing develops. Scalability is therefore not limited to computation time, but also concerns whether the tool’s structure can support future adaptation.
 
-In the context of this thesis, scalability refers to the extent to which the pedestrian routing tool can be extended beyond its initial implementation without requiring fundamental redesign. This concerns both spatial scalability, meaning the ability to apply the tool to larger or different geographic areas, and functional scalability, meaning the ability to incorporate new routing criteria as understanding of comfortable pedestrian routing develops. Scalability is therefore not understood only as computational performance, but also as the capacity of the tool’s structure to support future adaptation.
+For this type of workflow, scalability depends on three related implementation principles: performance, modularity, and reusability. Performance is necessary because spatial extension increases the number of raster cells, network edges, and route calculations. If preprocessing, network annotation, or routing become too slow, the tool cannot be practically extended. Modularity is necessary because the workflow combines distinct tasks, including data preparation, microclimate simulation, network annotation, and routing, which each have different data requirements and bottlenecks. Reusability is necessary because future applications may use different input data, environmental variables, or interfaces.
 
-Spatial scalability is primarily incorporated through performance-aware and reusable processing. The tool can be extended to additional geographic areas by applying the same sequence of data preparation, network annotation, and routing steps to a new spatial extent. However, as the study area increases, the number of raster cells, network edges, and possible route calculations also increases. Performance therefore becomes central to scalability, because spatial extension is only practical if the required preprocessing and routing computations remain manageable. #todo[end with something about this thesis?, Running routes should also be quick etc.]
+// In the context of this thesis, scalability refers to the extent to which the pedestrian routing tool can be extended beyond its initial implementation without requiring fundamental redesign. This concerns both spatial scalability, meaning the ability to apply the tool to larger or different geographic areas, and functional scalability, meaning the ability to incorporate new routing criteria as understanding of comfortable pedestrian routing develops. Scalability is therefore not understood only as computational performance, but also as the capacity of the tool’s structure to support future adaptation.
 
-Reusability is another condition for scalability. The tool combines multiple data sources, software components, and methodological assumptions. Because environmental data availability and preprocessing requirements may differ between regions, especially across national borders, the individual components should not be too tightly dependent on one specific dataset or implementation choice. By organising the tool into coherent components with limited coupling, parts of the workflow can be reused where possible, while individual components can be replaced or adapted when different input data or methods are required. This supports scalability because changes in one part of the pipeline do not necessarily require changes to the entire tool.
+// Spatial scalability is primarily incorporated through performance-aware and reusable processing. The tool can be extended to additional geographic areas by applying the same sequence of data preparation, network annotation, and routing steps to a new spatial extent. However, as the study area increases, the number of raster cells, network edges, and possible route calculations also increases. Performance therefore becomes central to scalability, because spatial extension is only practical if the required preprocessing and routing computations remain manageable. #todo[end with something about this thesis?, Running routes should also be quick etc.]
 
-Functional scalability is incorporated by treating the routing criteria as extendable rather than fixed. In this implementation, thermal comfort derived from UTCI categories is used to inform route choice, but this is only one possible interpretation of comfortable pedestrian routing. Other variables, such as visual interest, could also be relevant to pedestrian comfort and route preference @manley_cognitive_2021. To be scalable the tool therefore needs data structures and routing logic that allow additional edge attributes or weighting strategies to be introduced without redesigning the complete routing system.
+// Reusability is another condition for scalability. The tool combines multiple data sources, software components, and methodological assumptions. Because environmental data availability and preprocessing requirements may differ between regions, especially across national borders, the individual components should not be too tightly dependent on one specific dataset or implementation choice. By organising the tool into coherent components with limited coupling, parts of the workflow can be reused where possible, while individual components can be replaced or adapted when different input data or methods are required. This supports scalability because changes in one part of the pipeline do not necessarily require changes to the entire tool.
 
-Finally, scalability also depends on the ease with which extension can be carried out. Ideally, scaling the tool to a new area or adding new functionality would be limited mainly by computational resources. In practice, this was only partly achieved. Since the transfer between components still requires some manual work, meaning that scaling is not yet fully automatic. The tool therefore demonstrates a scalable structure, but its practical scalability could be improved by further automating the connections between preprocessing, network annotation, routing, and front-end use. 
+// Functional scalability is incorporated by treating the routing criteria as extendable rather than fixed. In this implementation, thermal comfort derived from UTCI categories is used to inform route choice, but this is only one possible interpretation of comfortable pedestrian routing. Other variables, such as visual interest, could also be relevant to pedestrian comfort and route preference @manley_cognitive_2021. To be scalable the tool therefore needs data structures and routing logic that allow additional edge attributes or weighting strategies to be introduced without redesigning the complete routing system.
 
-#todo[Maybe a part of this is results--generalizable insights?]
-
-== Contributions
-- A web-ui showcasing the tool 
-- A pedestrian routing tool that was built on a scalable/extensible structure.
-- Insights into the importance of implementation choices with regard to the performance and scalability of these tools.
-
-== Limitations
-- weather/climate: 
-  - no extra weather types considered. So there is no distinction between seasons or days.
-- computation time of input data (data preparation)
-  - cloud based formats 
-- UTCI but not person specific like PET
-  - include UMEP's URock to generate detailed 2d wind maps
-- pedestrian network from OSM 
-  - Dependence on user annotated road tags introduces uncertainty
-  - Almost all roads (unless sidewalk geometry is explicitly mapped) are mapped as center lines, while pedestrians almost always make use of sidewalks. So the sampling of the UTCI data is not done on the spot the pedestrian is actually walking. It's just an approximation.
-- SOLWEIG\_GPU implementation is not capable of considering negative height values (values below sea level)
-- Loss of an expert's view:
-  - Since the 'interpretation' of the UTCI map is done automatically there is no human expert to look and interpret the results. This means that at scale mistakes and issues might fall through the cracks. This can be both mistakes from the model or the implementation.
+// Finally, scalability also depends on the ease with which extension can be carried out. Ideally, scaling the tool to a new area or adding new functionality would be limited mainly by computational resources. In practice, this was only partly achieved. Since the transfer between components still requires some manual work, meaning that scaling is not yet automatic. The tool therefore demonstrates a scalable structure, but its practical scalability could be improved by further automating the connections between preprocessing, network annotation, routing, and front-end use. 
 
 
-== Future work
-- UTCI was used but this is not person specific, a value like PET would be more appropriate. However this needs wind information that is not generated in this thesis.The algorithm could be extended to calculate weights based on PET score by using the TMRT edge values if wind is also available. (I can do a basic implementation)
+== Concluding thoughts
 
-- Apply this methodology to different climates, to see if the methodology can achieve positive results that are similar to previous work. This would also test the scalability of the method & could be an easy open source way to improve the adaptive capacity of communities that are disproportionally effected by climate change.
-
-- Cloud native formats can greatly reduce the need for downloading and merging entire files, since they allow for fast data retrieval. Once these formats become broadly available the performance bottlenecks in the data preparation might not be a bottleneck any more.
-
-- Extend the pedestrian network with indoor paths.
-
-- no weather information: think of using user preferences effectively to limit the amount off 
+The broader implication of this thesis is that scalability in urban microclimate-informed routing cannot be separated from implementation. Data structures, file formats, software architecture, and network representations shape not only computational performance, but also the interpretability of the resulting routes. Treating these choices as methodological decisions rather than neutral technical details makes it possible to identify performance bottlenecks and address them through targeted design choices, without necessarily changing the underlying research objective.

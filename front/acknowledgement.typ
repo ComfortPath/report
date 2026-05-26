@@ -2,9 +2,11 @@
 
 #heading(outlined: false)[Acknowledgements]
 
-Thanks to everyone, especially my supervisors and my dog (in that order).
-Obviously, thanks also to the brilliant minds who created this _fantastic_ template!
+I would first like to thank my supervisors for their guidance, feedback, enthusiasm, and encouragement throughout this thesis. Their insights helped me shape this work into the strongest version of itself, while their understanding and support also helped me navigate the challenges beyond the academic aspects of the thesis. Sincerely, thank you!
 
-Lemongrass frosted gingerbread bites banana bread orange crumbled lentils sweet potato black bean burrito green pepper springtime strawberry ginger lemongrass agave green tea smoky maple tempeh glaze enchiladas couscous. Cranberry spritzer Malaysian cinnamon pineapple salsa apples spring cherry bomb bananas blueberry pops scotch bonnet pepper spiced pumpkin chili lime eating together kale blood orange smash arugula salad. Bento box roasted peanuts pasta Sicilian pistachio pesto lavender lemonade elderberry Southern Italian citrusy mint lime taco salsa lentils walnut pesto tart quinoa flatbread sweet potato grenadillo.
+I would also like to thank Julia and Michel for keeping me accountable (and present in the geolab) throughout the process, without you I doubt I would have been able to finish on time. 
 
-Thai super chili apricot salad cocoa dark chocolate vitamin glow mushroom risotto red amazon pepper simmer udon noodles soba noodles dragon fruit cherries strawberry mango smoothie basil chickpea crust pizza cauliflower cherry bomb pepper mediterranean street style Thai basil tacos. Balsamic vinaigrette Indian spiced kimchi tofu sandwiches smoked tofu apple vinaigrette salty Thai sun pepper cayenne four-layer fiery fruit peach strawberry mango vegan Bulgarian carrot Italian linguine puttanesca green bowl lemon red lentil soup overflowing berries habanero golden one bowl.
+Lastly, I'd like to thank my friends and family for their encouragement and patience. 
+
+
+
