@@ -29,7 +29,9 @@
     #text(1.7em, author)
     #v(2em, weak: true)
     #text(1.4em, [#graduation-month #graduation-year])
-    #v(15em, weak: true)
+    
+    #image("route_on_network.png", width: 80%)
+
     #text(font: sans-fonts, 1.2em, weight: 400, [A thesis submitted to the Delft University of Technology in partial fulfillment of the requirements for the degree of Master of Science in Geomatics])
   ]
 

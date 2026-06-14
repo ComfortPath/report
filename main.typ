@@ -1,4 +1,33 @@
 #import "template.typ": *
+#import "@preview/abbr:0.3.1"
+
+#show: abbr.show-rule
+#abbr.config(style: it => text(fill: black, it))
+#abbr.make(
+  ("API", "Application Programming Interface"),
+  ("CBA", "Component-Based Architecture"),
+  ("CHM", "Canopy Height Model"),
+  ("CPU", "Central Processing Unit"),
+  ("CRS", "Coordinate Reference System"),
+  ("DEM", "Digital Elevation Model"),
+  ("DHPC", "Delft High Performance Computing Centre"),
+  ("DSM", "Digital Surface Model"),
+  ("DSR", "Design Science Research"),
+  ("DTM", "Digital Terrain Model"),
+  ("ERA5", "ECMWF Reanalysis v5"),
+  ("IPCC", "Intergovernmental Panel on Climate Change"),
+  ("KNMI", "Koninklijk Nederlands Meteorologisch Instituut"),
+  ("OD", "Origin-Destination"),
+  ("OSM", "OpenStreetMap"),
+  ("OTC", "Outdoor Thermal Comfort"),
+  ("PDOK", "Publieke Dienstverlening Op de Kaart"),
+  ("PET", "Physiological Equivalent Temperature"),
+  ("PyPI", "Python Package Index"),
+  ("SOLWEIG", "Solar and LongWave Environmental Irradiance Geometry"),
+  ("UMC", "Urban Micro Climate"),
+  ("UMEP", "Urban Multi-scale Environmental Predictor"),
+  ("UTCI", "Universal Thermal Climate Index"),
+)
 
 #let mysettings = toml("settings.toml")
 #show: doc => msc-geomatics-tudelft(
@@ -29,7 +58,6 @@
 
 #include "front/abstract.typ"
 #include "front/acknowledgement.typ"
-
 #[
   #show outline.entry.where(
     level: 1
@@ -54,12 +82,7 @@
   target: figure.where(kind: table),
 )
 
-#outline(
-  title: [List of algorithms],
-  target: figure.where(kind: "algorithm"),
-)
-
-#outline(title: "TODOs", target: figure.where(kind: "todo")) <all-todos>
+#abbr.list(title: "List of Abbreviations", columns: 1)
 
 // page counter anchor
 #metadata(()) <front-matter>
@@ -107,7 +130,6 @@
 #include "appendices/appendixA.typ"
 #include "appendices/useofai.typ"
 #include "appendices/reproducibility.typ"
-#include "appendices/someumldia.typ"
 
 //-- references
 #bibliography("./refs/refs.bib", style: "./refs/ieee-alphabetical.csl")
