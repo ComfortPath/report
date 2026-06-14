@@ -51,7 +51,7 @@ Lastly, due to a bug in SOLWEIG\_GPU where it is unable to consider negative val
 #figure(
   image("../figs/implementation/running_solweig.png", width: 50%),
   caption: [
-    Structure of collection of scripts used for runnign SOLWEIG
+    Structure of collection of scripts used for running SOLWEIG
   ],
 ) <fig:running-solweig>
 SOLWEIG\_GPU was run on DelftBlue, the TU Delft high-performance computing cluster shared with the entire university. DelftBlue provides CPU, high-memory, and GPU nodes, including GPU partitions with NVIDIA V100 and A100 GPUs, making it suitable for computationally intensive raster-based modelling tasks @DHPC2024. The model was executed through the SOLWEIG\_GPU package @kamath_solweig-gpu_2026 @solweig_gpu_git, using a single function call to run the simulation after the required input rasters and meteorological files had been prepared.
@@ -96,11 +96,10 @@ During processing the network is kept in the NetworkX representation used by OSM
   image("../figs/implementation/routing_pro.png", width: 40%
 ),
   caption: [
-    Structure oft the routing prototype
+    Structure of the routing prototype
   ],
 )<fig:routing-pro>
 
-== Routing prototype
 The routing prototype connects the prepared pedestrian network, the routing algorithm, an API layer, and an interactive web interface. The prepared network is loaded from the persisted schema folder containing the node table, edge table, and metadata. At startup, this network is converted into the routing representation used by the algorithm and is also transformed into a GeoJSON payload that can be displayed in the browser. This means that the same underlying network is used both for visualisation and for route calculation, avoiding a separation between what the user sees and what the algorithm uses.
 
 === Adjacency list
@@ -120,7 +119,7 @@ The algorithm uses a priority queue to always expand the currently cheapest part
 
 If the new combination of (node, state) has not been reached before, or if it has now been reached with a lower cost, it is added to the queue. The algorithm also stores the predecessor of each accepted node-state combination. This is required because the final route must be reconstructed after the target has been found. The search stops when the target node is reached. At that point, the algorithm has found the best route under the implemented cost structure, including both distance and dynamic thermal penalties.
 
-The final route is then transformed back to it's original OSMnx id's. This allows the retracing of the route in the front-end, since the internal network representation for routing is not used by the front-end.
+The final route is then transformed back to its original OSMnx IDs. This allows the retracing of the route in the front-end, since the internal network representation for routing is not used by the front-end.
 
 === Application
 The application is structured as a local client-server prototype, with the backend API and #link("https://shiny.posit.co/r/getstarted/shiny-basics/lesson1/")[Shiny] interface served separately. This keeps the routing logic outside the interface code: the Shiny application handles map interaction and visualisation, while the @API manages the network, route requests, algorithm execution, and response formatting.

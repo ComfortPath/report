@@ -23,7 +23,7 @@ The interaction between outdoor thermal conditions and the human body can be und
 ) <fig:utci-expl>
 
 === Urban Microclimate Modelling 
-Urban Microclimate (@UMC) modelling tools operationalise these concepts by simulating the environmental variables that govern the human energy balance in outdoor urban environments. In this thesis, the @UMEP is used to model these conditions, because it is an open-source tool @lindberg_urban_2017. From @UMEP, the @SOLWEIG ((SOlar and LongWave Environmental Irradiance Geometry model)) model is used to estimate mean radiant temperature by modelling spatial variations in shortwave and longwave radiation fluxes in complex urban settings @lindberg_urban_2017. Which is used as input for the @UTCI calculation together with ERA5 weather data.
+Urban Microclimate (@UMC) modelling tools operationalise these concepts by simulating the environmental variables that govern the human energy balance in outdoor urban environments. In this thesis, the @UMEP is used to model these conditions, because it is an open-source tool @lindberg_urban_2017. From @UMEP, the @SOLWEIG (SOlar and LongWave Environmental Irradiance Geometry model) model is used to estimate mean radiant temperature by modelling spatial variations in shortwave and longwave radiation fluxes in complex urban settings @lindberg_urban_2017. Which is used as input for the @UTCI calculation together with ERA5 weather data.
 
 == Dijkstra's least cost algorithm
 <bkg:dijkstra>
